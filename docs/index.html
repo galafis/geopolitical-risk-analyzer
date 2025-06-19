@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geopolitical Risk Analyzer | Gabriel Demetrios Lafis</title>
+    <meta name="description" content="Advanced framework for predicting and analyzing geopolitical risks using machine learning and data science">
+    <meta name="author" content="Gabriel Demetrios Lafis">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://galafis.github.io/geopolitical-risk-analyzer/">
+    <meta property="og:title" content="Geopolitical Risk Analyzer">
+    <meta property="og:description" content="Advanced framework for predicting and analyzing geopolitical risks">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://galafis.github.io/geopolitical-risk-analyzer/">
+    <meta property="twitter:title" content="Geopolitical Risk Analyzer">
+    <meta property="twitter:description" content="Advanced framework for predicting and analyzing geopolitical risks">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-globe-americas"></i>
+                <span>Geopolitical Risk Analyzer</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#scenarios" class="nav-link">Live Scenarios</a>
+                <a href="#analysis" class="nav-link">Risk Analysis</a>
+                <a href="#framework" class="nav-link">Framework</a>
+                <a href="#about" class="nav-link">About</a>
+                <div class="language-toggle">
+                    <button id="lang-en" class="lang-btn active">EN</button>
+                    <button id="lang-pt" class="lang-btn">PT</button>
+                </div>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-en="Geopolitical Risk Analyzer" data-pt="Analisador de Risco Geopolítico">
+                    Geopolitical Risk Analyzer
+                </h1>
+                <p class="hero-subtitle" data-en="Advanced framework for predicting and analyzing global conflicts using machine learning and data science" data-pt="Framework avançado para prever e analisar conflitos globais usando aprendizado de máquina e ciência de dados">
+                    Advanced framework for predicting and analyzing global conflicts using machine learning and data science
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="risk-score">78</span>
+                        <span class="stat-label" data-en="Global Risk Score" data-pt="Pontuação de Risco Global">Global Risk Score</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="active-conflicts">12</span>
+                        <span class="stat-label" data-en="Active Conflicts" data-pt="Conflitos Ativos">Active Conflicts</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="nuclear-powers">9</span>
+                        <span class="stat-label" data-en="Nuclear Powers" data-pt="Potências Nucleares">Nuclear Powers</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('scenarios')" data-en="Analyze Current Scenarios" data-pt="Analisar Cenários Atuais">
+                        <i class="fas fa-chart-line"></i>
+                        Analyze Current Scenarios
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('framework')" data-en="Explore Framework" data-pt="Explorar Framework">
+                        <i class="fas fa-cogs"></i>
+                        Explore Framework
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="world-map-container">
+                    <div id="world-map"></div>
+                    <div class="risk-indicators">
+                        <div class="risk-indicator high" data-region="middle-east">
+                            <span class="indicator-dot"></span>
+                            <span class="indicator-label">Middle East: HIGH</span>
+                        </div>
+                        <div class="risk-indicator moderate" data-region="pacific">
+                            <span class="indicator-dot"></span>
+                            <span class="indicator-label">Pacific: MODERATE</span>
+                        </div>
+                        <div class="risk-indicator critical" data-region="europe">
+                            <span class="indicator-dot"></span>
+                            <span class="indicator-label">Europe: CRITICAL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Current Scenarios Section -->
+    <section id="scenarios" class="scenarios">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Live Geopolitical Scenarios" data-pt="Cenários Geopolíticos Atuais">Live Geopolitical Scenarios</h2>
+                <p data-en="Real-time analysis of critical global conflicts and their escalation potential" data-pt="Análise em tempo real de conflitos globais críticos e seu potencial de escalada">
+                    Real-time analysis of critical global conflicts and their escalation potential
+                </p>
+            </div>
+            
+            <div class="scenarios-grid">
+                <!-- Israel-Iran Scenario -->
+                <div class="scenario-card" data-scenario="israel-iran">
+                    <div class="scenario-header">
+                        <div class="scenario-flags">
+                            <span class="flag">🇮🇱</span>
+                            <span class="vs">VS</span>
+                            <span class="flag">🇮🇷</span>
+                        </div>
+                        <h3 data-en="Israel-Iran Regional Confrontation" data-pt="Confronto Regional Israel-Irã">Israel-Iran Regional Confrontation</h3>
+                        <div class="risk-badge critical">CRITICAL</div>
+                    </div>
+                    <div class="scenario-content">
+                        <div class="risk-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="meter-value">85/100</span>
+                        </div>
+                        <div class="scenario-factors">
+                            <div class="factor">
+                                <i class="fas fa-radiation"></i>
+                                <span data-en="Nuclear Implications" data-pt="Implicações Nucleares">Nuclear Implications</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-oil-can"></i>
+                                <span data-en="Oil Supply Risk" data-pt="Risco de Fornecimento de Petróleo">Oil Supply Risk</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-users"></i>
+                                <span data-en="Proxy Networks" data-pt="Redes Proxy">Proxy Networks</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="openScenarioDetails('israel-iran')">
+                            <span data-en="Analyze Scenario" data-pt="Analisar Cenário">Analyze Scenario</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Russia-Ukraine Scenario -->
+                <div class="scenario-card" data-scenario="russia-ukraine">
+                    <div class="scenario-header">
+                        <div class="scenario-flags">
+                            <span class="flag">🇷🇺</span>
+                            <span class="vs">VS</span>
+                            <span class="flag">🇺🇦</span>
+                        </div>
+                        <h3 data-en="Russia-Ukraine War Escalation" data-pt="Escalada da Guerra Rússia-Ucrânia">Russia-Ukraine War Escalation</h3>
+                        <div class="risk-badge high">HIGH</div>
+                    </div>
+                    <div class="scenario-content">
+                        <div class="risk-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="meter-value">78/100</span>
+                        </div>
+                        <div class="scenario-factors">
+                            <div class="factor">
+                                <i class="fas fa-shield-alt"></i>
+                                <span data-en="NATO Involvement" data-pt="Envolvimento da OTAN">NATO Involvement</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-bolt"></i>
+                                <span data-en="Energy Warfare" data-pt="Guerra Energética">Energy Warfare</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-bomb"></i>
+                                <span data-en="Nuclear Threats" data-pt="Ameaças Nucleares">Nuclear Threats</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="openScenarioDetails('russia-ukraine')">
+                            <span data-en="Analyze Scenario" data-pt="Analisar Cenário">Analyze Scenario</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- US-China Taiwan Scenario -->
+                <div class="scenario-card" data-scenario="us-china-taiwan">
+                    <div class="scenario-header">
+                        <div class="scenario-flags">
+                            <span class="flag">🇺🇸</span>
+                            <span class="vs">VS</span>
+                            <span class="flag">🇨🇳</span>
+                        </div>
+                        <h3 data-en="US-China Taiwan Strait Crisis" data-pt="Crise do Estreito de Taiwan EUA-China">US-China Taiwan Strait Crisis</h3>
+                        <div class="risk-badge moderate">MODERATE-HIGH</div>
+                    </div>
+                    <div class="scenario-content">
+                        <div class="risk-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 72%"></div>
+                            </div>
+                            <span class="meter-value">72/100</span>
+                        </div>
+                        <div class="scenario-factors">
+                            <div class="factor">
+                                <i class="fas fa-microchip"></i>
+                                <span data-en="Semiconductor Crisis" data-pt="Crise de Semicondutores">Semiconductor Crisis</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-handshake"></i>
+                                <span data-en="Alliance Systems" data-pt="Sistemas de Aliança">Alliance Systems</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-chart-line"></i>
+                                <span data-en="Economic Impact" data-pt="Impacto Econômico">Economic Impact</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" onclick="openScenarioDetails('us-china-taiwan')">
+                            <span data-en="Analyze Scenario" data-pt="Analisar Cenário">Analyze Scenario</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- World War Risk Scenario -->
+                <div class="scenario-card world-war-card" data-scenario="world-war">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 data-en="World War III Risk Assessment" data-pt="Avaliação de Risco da Terceira Guerra Mundial">World War III Risk Assessment</h3>
+                        <div class="risk-badge extreme">EXTREME ALERT</div>
+                    </div>
+                    <div class="scenario-content">
+                        <div class="risk-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill world-war-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="meter-value">88/100</span>
+                        </div>
+                        <div class="scenario-factors">
+                            <div class="factor">
+                                <i class="fas fa-fire"></i>
+                                <span data-en="Multiple Fronts" data-pt="Múltiplas Frentes">Multiple Fronts</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-atom"></i>
+                                <span data-en="Nuclear Escalation" data-pt="Escalada Nuclear">Nuclear Escalation</span>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-network-wired"></i>
+                                <span data-en="Alliance Cascade" data-pt="Cascata de Alianças">Alliance Cascade</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="openScenarioDetails('world-war')">
+                            <span data-en="Analyze Global Risk" data-pt="Analisar Risco Global">Analyze Global Risk</span>
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Analysis Dashboard -->
+    <section id="analysis" class="analysis">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Real-Time Risk Analysis" data-pt="Análise de Risco em Tempo Real">Real-Time Risk Analysis</h2>
+                <p data-en="Interactive dashboard showing global risk metrics and trends" data-pt="Painel interativo mostrando métricas e tendências de risco global">
+                    Interactive dashboard showing global risk metrics and trends
+                </p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 data-en="Global Risk Trends" data-pt="Tendências de Risco Global">Global Risk Trends</h3>
+                        <div class="card-controls">
+                            <select id="timeframe-select">
+                                <option value="7d">Last 7 Days</option>
+                                <option value="30d" selected>Last 30 Days</option>
+                                <option value="90d">Last 90 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="risk-trends-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 data-en="Risk by Region" data-pt="Risco por Região">Risk by Region</h3>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="regional-risk-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 data-en="Nuclear Risk Matrix" data-pt="Matriz de Risco Nuclear">Nuclear Risk Matrix</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="nuclear-matrix">
+                            <div class="matrix-item" data-country="USA">
+                                <span class="country-flag">🇺🇸</span>
+                                <span class="country-name">USA</span>
+                                <div class="risk-indicator low"></div>
+                                <span class="warhead-count">5,550</span>
+                            </div>
+                            <div class="matrix-item" data-country="RUS">
+                                <span class="country-flag">🇷🇺</span>
+                                <span class="country-name">Russia</span>
+                                <div class="risk-indicator high"></div>
+                                <span class="warhead-count">6,257</span>
+                            </div>
+                            <div class="matrix-item" data-country="CHN">
+                                <span class="country-flag">🇨🇳</span>
+                                <span class="country-name">China</span>
+                                <div class="risk-indicator moderate"></div>
+                                <span class="warhead-count">350</span>
+                            </div>
+                            <div class="matrix-item" data-country="PRK">
+                                <span class="country-flag">🇰🇵</span>
+                                <span class="country-name">N. Korea</span>
+                                <div class="risk-indicator critical"></div>
+                                <span class="warhead-count">~30</span>
+                            </div>
+                            <div class="matrix-item" data-country="IRN">
+                                <span class="country-flag">🇮🇷</span>
+                                <span class="country-name">Iran</span>
+                                <div class="risk-indicator extreme"></div>
+                                <span class="warhead-count">0*</span>
+                            </div>
+                            <div class="matrix-item" data-country="ISR">
+                                <span class="country-flag">🇮🇱</span>
+                                <span class="country-name">Israel</span>
+                                <div class="risk-indicator high"></div>
+                                <span class="warhead-count">~90</span>
+                            </div>
+                        </div>
+                        <div class="matrix-legend">
+                            <span class="legend-item">
+                                <div class="risk-indicator low"></div>
+                                <span data-en="Low Risk" data-pt="Baixo Risco">Low Risk</span>
+                            </span>
+                            <span class="legend-item">
+                                <div class="risk-indicator moderate"></div>
+                                <span data-en="Moderate" data-pt="Moderado">Moderate</span>
+                            </span>
+                            <span class="legend-item">
+                                <div class="risk-indicator high"></div>
+                                <span data-en="High Risk" data-pt="Alto Risco">High Risk</span>
+                            </span>
+                            <span class="legend-item">
+                                <div class="risk-indicator critical"></div>
+                                <span data-en="Critical" data-pt="Crítico">Critical</span>
+                            </span>
+                            <span class="legend-item">
+                                <div class="risk-indicator extreme"></div>
+                                <span data-en="Extreme" data-pt="Extremo">Extreme</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 data-en="Early Warning Indicators" data-pt="Indicadores de Alerta Precoce">Early Warning Indicators</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="warning-indicators">
+                            <div class="indicator-item active">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-radiation"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Nuclear Alert Level Raised" data-pt="Nível de Alerta Nuclear Elevado">Nuclear Alert Level Raised</span>
+                                    <span class="indicator-time">2 hours ago</span>
+                                </div>
+                                <div class="indicator-severity critical"></div>
+                            </div>
+                            <div class="indicator-item">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Market Volatility Spike" data-pt="Pico de Volatilidade do Mercado">Market Volatility Spike</span>
+                                    <span class="indicator-time">6 hours ago</span>
+                                </div>
+                                <div class="indicator-severity high"></div>
+                            </div>
+                            <div class="indicator-item">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-satellite"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Military Satellite Activity" data-pt="Atividade de Satélite Militar">Military Satellite Activity</span>
+                                    <span class="indicator-time">12 hours ago</span>
+                                </div>
+                                <div class="indicator-severity moderate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section id="framework" class="framework">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Three-Pillar Framework" data-pt="Framework de Três Pilares">Three-Pillar Framework</h2>
+                <p data-en="Advanced machine learning architecture for comprehensive geopolitical risk assessment" data-pt="Arquitetura avançada de aprendizado de máquina para avaliação abrangente de risco geopolítico">
+                    Advanced machine learning architecture for comprehensive geopolitical risk assessment
+                </p>
+            </div>
+            
+            <div class="pillars-container">
+                <div class="pillar" data-pillar="events">
+                    <div class="pillar-icon">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <h3 data-en="Pillar 1: Event Prediction" data-pt="Pilar 1: Predição de Eventos">Pillar 1: Event Prediction</h3>
+                    <p class="pillar-subtitle" data-en="The 'Radar'" data-pt="O 'Radar'">The "Radar"</p>
+                    <p data-en="Analyzes historical conflict patterns using NGBoost to predict future violence intensity and probability" data-pt="Analisa padrões históricos de conflito usando NGBoost para prever intensidade e probabilidade de violência futura">
+                        Analyzes historical conflict patterns using NGBoost to predict future violence intensity and probability
+                    </p>
+                    <div class="pillar-tech">
+                        <span class="tech-tag">NGBoost</span>
+                        <span class="tech-tag">ACLED Data</span>
+                        <span class="tech-tag">GDELT</span>
+                    </div>
+                    <button class="btn btn-outline" onclick="showPillarDetails('events')">
+                        <span data-en="Learn More" data-pt="Saiba Mais">Learn More</span>
+                    </button>
+                </div>
+
+                <div class="pillar" data-pillar="narratives">
+                    <div class="pillar-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-en="Pillar 2: Narrative Analysis" data-pt="Pilar 2: Análise Narrativa">Pillar 2: Narrative Analysis</h3>
+                    <p class="pillar-subtitle" data-en="The 'Sonar'" data-pt="O 'Sonar'">The "Sonar"</p>
+                    <p data-en="Creates real-time Geopolitical Tension Index (GTI) from news, speeches, and diplomatic communications" data-pt="Cria Índice de Tensão Geopolítica (ITG) em tempo real a partir de notícias, discursos e comunicações diplomáticas">
+                        Creates real-time Geopolitical Tension Index (GTI) from news, speeches, and diplomatic communications
+                    </p>
+                    <div class="pillar-tech">
+                        <span class="tech-tag">BERT</span>
+                        <span class="tech-tag">Transformers</span>
+                        <span class="tech-tag">NLP</span>
+                    </div>
+                    <button class="btn btn-outline" onclick="showPillarDetails('narratives')">
+                        <span data-en="Learn More" data-pt="Saiba Mais">Learn More</span>
+                    </button>
+                </div>
+
+                <div class="pillar" data-pillar="networks">
+                    <div class="pillar-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 data-en="Pillar 3: Network Analysis" data-pt="Pilar 3: Análise de Rede">Pillar 3: Network Analysis</h3>
+                    <p class="pillar-subtitle" data-en="The 'Web'" data-pt="A 'Teia'">The "Web"</p>
+                    <p data-en="Maps alliance and trade networks to identify vulnerabilities and cascade effects in global systems" data-pt="Mapeia redes de aliança e comércio para identificar vulnerabilidades e efeitos cascata em sistemas globais">
+                        Maps alliance and trade networks to identify vulnerabilities and cascade effects in global systems
+                    </p>
+                    <div class="pillar-tech">
+                        <span class="tech-tag">NetworkX</span>
+                        <span class="tech-tag">Graph Theory</span>
+                        <span class="tech-tag">Trade Data</span>
+                    </div>
+                    <button class="btn btn-outline" onclick="showPillarDetails('networks')">
+                        <span data-en="Learn More" data-pt="Saiba Mais">Learn More</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="military-analysis">
+                <div class="military-header">
+                    <h3 data-en="Military Capabilities Analysis" data-pt="Análise de Capacidades Militares">Military Capabilities Analysis</h3>
+                    <p data-en="Comprehensive assessment of nuclear arsenals, conventional forces, and escalation dynamics" data-pt="Avaliação abrangente de arsenais nucleares, forças convencionais e dinâmicas de escalada">
+                        Comprehensive assessment of nuclear arsenals, conventional forces, and escalation dynamics
+                    </p>
+                </div>
+                <div class="military-features">
+                    <div class="feature">
+                        <i class="fas fa-atom"></i>
+                        <span data-en="Nuclear Arsenal Tracking" data-pt="Rastreamento de Arsenal Nuclear">Nuclear Arsenal Tracking</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-fighter-jet"></i>
+                        <span data-en="Conventional Force Assessment" data-pt="Avaliação de Força Convencional">Conventional Force Assessment</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-biohazard"></i>
+                        <span data-en="CBRN Capabilities" data-pt="Capacidades QBRN">CBRN Capabilities</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-balance-scale"></i>
+                        <span data-en="Military Balance Analysis" data-pt="Análise de Equilíbrio Militar">Military Balance Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 data-en="About the Project" data-pt="Sobre o Projeto">About the Project</h2>
+                    <p data-en="The Geopolitical Risk Analyzer represents a cutting-edge approach to understanding and predicting global conflicts. Developed by Gabriel Demetrios Lafis, this framework combines advanced machine learning techniques with comprehensive data analysis to provide actionable insights for policymakers, analysts, and researchers." data-pt="O Analisador de Risco Geopolítico representa uma abordagem de ponta para entender e prever conflitos globais. Desenvolvido por Gabriel Demetrios Lafis, este framework combina técnicas avançadas de aprendizado de máquina com análise abrangente de dados para fornecer insights acionáveis para formuladores de políticas, analistas e pesquisadores.">
+                        The Geopolitical Risk Analyzer represents a cutting-edge approach to understanding and predicting global conflicts. Developed by Gabriel Demetrios Lafis, this framework combines advanced machine learning techniques with comprehensive data analysis to provide actionable insights for policymakers, analysts, and researchers.
+                    </p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h4 data-en="Advanced AI Models" data-pt="Modelos de IA Avançados">Advanced AI Models</h4>
+                                <p data-en="Utilizing NGBoost, BERT, and NetworkX for comprehensive analysis" data-pt="Utilizando NGBoost, BERT e NetworkX para análise abrangente">Utilizing NGBoost, BERT, and NetworkX for comprehensive analysis</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h4 data-en="Real-Time Data" data-pt="Dados em Tempo Real">Real-Time Data</h4>
+                                <p data-en="Integration with ACLED, GDELT, and World Bank APIs" data-pt="Integração com APIs ACLED, GDELT e Banco Mundial">Integration with ACLED, GDELT, and World Bank APIs</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4 data-en="Conflict Prevention" data-pt="Prevenção de Conflitos">Conflict Prevention</h4>
+                                <p data-en="Designed for early warning and diplomatic intervention" data-pt="Projetado para alerta precoce e intervenção diplomática">Designed for early warning and diplomatic intervention</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="author-info">
+                        <h3 data-en="About the Author" data-pt="Sobre o Autor">About the Author</h3>
+                        <div class="author-card">
+                            <div class="author-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="author-details">
+                                <h4>Gabriel Demetrios Lafis</h4>
+                                <p data-en="Data Scientist & Geopolitical Analyst" data-pt="Cientista de Dados e Analista Geopolítico">Data Scientist & Geopolitical Analyst</p>
+                                <div class="author-links">
+                                    <a href="https://github.com/galafis" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="https://linkedin.com/in/gabriel-lafis" target="_blank">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="tech-stack">
+                        <h3 data-en="Technology Stack" data-pt="Stack Tecnológico">Technology Stack</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Scikit-learn</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-brain"></i>
+                                <span>Transformers</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>NetworkX</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-database"></i>
+                                <span>Pandas</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Plotly</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Geopolitical Risk Analyzer</h3>
+                    <p data-en="Advanced framework for conflict prediction and analysis" data-pt="Framework avançado para predição e análise de conflitos">
+                        Advanced framework for conflict prediction and analysis
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com/galafis/geopolitical-risk-analyzer" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/gabriel-lafis" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Quick Links" data-pt="Links Rápidos">Quick Links</h4>
+                    <ul>
+                        <li><a href="#scenarios" data-en="Live Scenarios" data-pt="Cenários Atuais">Live Scenarios</a></li>
+                        <li><a href="#analysis" data-en="Risk Analysis" data-pt="Análise de Risco">Risk Analysis</a></li>
+                        <li><a href="#framework" data-en="Framework" data-pt="Framework">Framework</a></li>
+                        <li><a href="https://github.com/galafis/geopolitical-risk-analyzer" target="_blank" data-en="Documentation" data-pt="Documentação">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Disclaimer" data-pt="Aviso Legal">Disclaimer</h4>
+                    <p data-en="This tool is designed for research and conflict prevention purposes only. All predictions should be validated through multiple sources and expert analysis." data-pt="Esta ferramenta é projetada apenas para fins de pesquisa e prevenção de conflitos. Todas as previsões devem ser validadas através de múltiplas fontes e análise especializada.">
+                        This tool is designed for research and conflict prevention purposes only. All predictions should be validated through multiple sources and expert analysis.
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Gabriel Demetrios Lafis. <span data-en="All rights reserved." data-pt="Todos os direitos reservados.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scenario Modal -->
+    <div id="scenario-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/scenarios.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
