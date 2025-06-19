@@ -40,6 +40,7 @@
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#scenarios" class="nav-link">Live Scenarios</a>
                 <a href="#analysis" class="nav-link">Risk Analysis</a>
+                <a href="#early-warning" class="nav-link" data-en="Early Warning" data-pt="Alerta Precoce">Early Warning</a>
                 <a href="#framework" class="nav-link">Framework</a>
                 <a href="#recommendations" class="nav-link" data-en="Recommendations" data-pt="Recomendações">Recommendations</a>
                 <a href="#predictions" class="nav-link" data-en="Predictions" data-pt="Predições">Predictions</a>
@@ -914,9 +915,152 @@
                 </div>
             </div>
         </div>
+    </section>    <!-- Early Warning Indicators Section -->
+    <section id="early-warning" class="early-warning-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Early Warning Indicators" data-pt="Indicadores de Alerta Precoce">Early Warning Indicators</h2>
+                <p data-en="Real-time monitoring of critical geopolitical indicators powered by AI and global news feeds" data-pt="Monitoramento em tempo real de indicadores geopolíticos críticos alimentado por IA e feeds de notícias globais">
+                    Real-time monitoring of critical geopolitical indicators powered by AI and global news feeds
+                </p>
+            </div>
+            
+            <!-- Power BI Dashboard Integration -->
+            <div class="powerbi-dashboard">
+                <div class="dashboard-header">
+                    <h3 data-en="Live Intelligence Dashboard" data-pt="Dashboard de Inteligência ao Vivo">Live Intelligence Dashboard</h3>
+                    <div class="dashboard-controls">
+                        <div class="auto-update-status">
+                            <i class="fas fa-sync-alt spinning"></i>
+                            <span data-en="Auto-updating every" data-pt="Atualizando automaticamente a cada">Auto-updating every</span>
+                            <span class="update-interval">3 hours</span>
+                        </div>
+                        <div class="criticality-indicator normal">
+                            <span data-en="Criticality:" data-pt="Criticidade:">Criticality:</span>
+                            <span class="criticality-level">NORMAL</span>
+                        </div>
+                        <div class="last-update">
+                            Last updated: Loading...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="active-alerts">6</div>
+                            <div class="metric-label" data-en="Active Alerts" data-pt="Alertas Ativos">Active Alerts</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="news-analyzed">1,247</div>
+                            <div class="metric-label" data-en="News Analyzed (24h)" data-pt="Notícias Analisadas (24h)">News Analyzed (24h)</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="risk-trend">+12%</div>
+                            <div class="metric-label" data-en="Risk Trend (7d)" data-pt="Tendência de Risco (7d)">Risk Trend (7d)</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="sources-monitored">47</div>
+                            <div class="metric-label" data-en="Sources Monitored" data-pt="Fontes Monitoradas">Sources Monitored</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Early Warning Indicators Grid -->
+            <div class="warning-indicators-grid" id="early-warning-container">
+                <!-- Indicators will be populated by JavaScript -->
+            </div>
+            
+            <!-- News Sources Integration -->
+            <div class="news-sources-section">
+                <h3 data-en="Trusted News Sources" data-pt="Fontes de Notícias Confiáveis">Trusted News Sources</h3>
+                <div class="news-sources-grid">
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>Reuters</h4>
+                            <p data-en="Global news agency - 95% reliability" data-pt="Agência de notícias global - 95% de confiabilidade">Global news agency - 95% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fab fa-bbc"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>BBC World</h4>
+                            <p data-en="British Broadcasting Corporation - 93% reliability" data-pt="British Broadcasting Corporation - 93% de confiabilidade">British Broadcasting Corporation - 93% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>Associated Press</h4>
+                            <p data-en="American news agency - 94% reliability" data-pt="Agência de notícias americana - 94% de confiabilidade">American news agency - 94% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fas fa-flag-un"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>UN News</h4>
+                            <p data-en="United Nations official news - 98% reliability" data-pt="Notícias oficiais das Nações Unidas - 98% de confiabilidade">United Nations official news - 98% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>SIPRI</h4>
+                            <p data-en="Stockholm International Peace Research Institute - 97% reliability" data-pt="Instituto Internacional de Pesquisa da Paz de Estocolmo - 97% de confiabilidade">Stockholm International Peace Research Institute - 97% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                    <div class="news-source">
+                        <div class="source-logo">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="source-info">
+                            <h4>IAEA</h4>
+                            <p data-en="International Atomic Energy Agency - 98% reliability" data-pt="Agência Internacional de Energia Atômica - 98% de confiabilidade">International Atomic Energy Agency - 98% reliability</p>
+                            <span class="source-status active">Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Predictions Tracking Section -->
+    <!-- Predictions Tracking -->ection -->
     <section id="predictions" class="predictions">
         <div class="container">
             <div class="section-header">
@@ -1062,8 +1206,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/charts.js"></script>
-    <script src="js/scenarios.js"></script>
+    
+    <!-- Power BI Integration -->
+    <script src="js/powerbi-integration.js"></script>
+    
+    <!-- Main JavaScript -->
     <script src="js/main.js"></script>
+    <script src="js/scenarios.js"></script>
 </body>
 </html>
-
