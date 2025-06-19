@@ -2471,3 +2471,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
+
+// Force black numbers on page load - DEFINITIVE SOLUTION
+document.addEventListener('DOMContentLoaded', function() {
+    function forceBlackNumbers() {
+        const allNumbers = document.querySelectorAll('.metric-value, .stat-number, .prediction-value, .warning-value, .dashboard-metric .value, .live-metric .value, .predictions-metrics .metric-value, .early-warning .metric-value');
+        
+        allNumbers.forEach(el => {
+            el.style.setProperty('color', '#000000', 'important');
+            el.style.setProperty('font-weight', '900', 'important');
+            el.style.setProperty('text-shadow', 'none', 'important');
+            el.style.setProperty('background', 'rgba(255,255,255,0.9)', 'important');
+            el.style.setProperty('padding', '0.2em 0.4em', 'important');
+            el.style.setProperty('border-radius', '4px', 'important');
+            el.style.setProperty('display', 'inline-block', 'important');
+        });
+        
+        console.log('Forced black color on', allNumbers.length, 'number elements');
+    }
+    
+    // Apply immediately
+    forceBlackNumbers();
+    
+    // Apply again after 1 second to catch dynamically loaded content
+    setTimeout(forceBlackNumbers, 1000);
+    
+    // Apply every 5 seconds to maintain black numbers
+    setInterval(forceBlackNumbers, 5000);
+});
+
+// Also apply when sections are scrolled into view
+function observeNumberElements() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const numbers = entry.target.querySelectorAll('.metric-value, .stat-number');
+                numbers.forEach(el => {
+                    el.style.setProperty('color', '#000000', 'important');
+                    el.style.setProperty('font-weight', '900', 'important');
+                    el.style.setProperty('background', 'rgba(255,255,255,0.9)', 'important');
+                    el.style.setProperty('padding', '0.2em 0.4em', 'important');
+                    el.style.setProperty('border-radius', '4px', 'important');
+                });
+            }
+        });
+    });
+    
+    // Observe all sections with metrics
+    document.querySelectorAll('.predictions, .early-warning, .powerbi-dashboard').forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// Initialize observer when DOM is ready
+document.addEventListener('DOMContentLoaded', observeNumberElements);
+
