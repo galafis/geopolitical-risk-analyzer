@@ -2435,32 +2435,154 @@ function refreshPredictionsData() {
     updatePredictionsDisplay(predictions2025);
 }
 
-// Update predictions display
+// Update predictions display with 2025 data
 function updatePredictionsDisplay(predictions) {
     const container = document.querySelector('.predictions-list');
     if (!container) return;
     
-    // Add new predictions to the top
-    predictions.forEach(prediction => {
-        const predictionElement = createPredictionElement(prediction);
-        container.insertBefore(predictionElement, container.firstChild);
+    // Clear existing predictions
+    container.innerHTML = '';
+    
+    // Use 2025 predictions data if available
+    const predictions2025 = window.predictionsData2025 || predictions;
+    
+    predictions2025.forEach(prediction => {
+        const predictionElement = createPredictionElement2025(prediction);
+        container.appendChild(predictionElement);
     });
     
-    console.log('Predictions data refreshed with 2025 events');
+    console.log('Predictions display updated with 2025 data');
 }
 
-// Create prediction element
-function createPredictionElement(prediction) {
+// Create prediction element for 2025 data
+function createPredictionElement2025(prediction) {
     const div = document.createElement('div');
-    div.className = 'prediction-item verified';
+    div.className = `prediction-item ${prediction.status.toLowerCase().replace(/\s+/g, '-')}`;
     div.innerHTML = `
-        <div class="prediction-date">${prediction.date}</div>
-        <div class="prediction-event">${prediction.event}</div>
-        <div class="prediction-status ${prediction.status.toLowerCase().replace(' ', '-')}">${prediction.status}</div>
-        <div class="prediction-accuracy">${prediction.accuracy}</div>
-        <div class="prediction-source">${prediction.source}</div>
+        <div class="prediction-header">
+            <div class="prediction-date">${prediction.date}</div>
+            <div class="prediction-category ${prediction.category}">${prediction.category.toUpperCase()}</div>
+        </div>
+        <div class="prediction-content">
+            <h4 class="prediction-title">${prediction.prediction}</h4>
+            <div class="prediction-details">
+                <span class="prediction-confidence">Confidence: ${prediction.confidence}</span>
+                <span class="prediction-accuracy">Accuracy: ${prediction.accuracy}</span>
+                <span class="prediction-status ${prediction.status.toLowerCase().replace(/\s+/g, '-')}">${prediction.status}</span>
+            </div>
+            <p class="prediction-outcome">${prediction.outcome}</p>
+            <div class="prediction-source">Source: ${prediction.source}</div>
+            <div class="prediction-impact">Impact: ${prediction.impact}</div>
+        </div>
     `;
     return div;
+}
+
+// Initialize predictions with 2025 data
+function initializePredictionsTracking() {
+    console.log('Initializing Predictions Tracking with 2025 data...');
+    
+    // Update metrics with 2025 data
+    if (window.accuracyTrends2025) {
+        const metrics = window.accuracyTrends2025.overall;
+        
+        // Update metric displays
+        updateMetricDisplay('total-predictions', metrics.totalPredictions);
+        updateMetricDisplay('verified-correct', metrics.verifiedCorrect);
+        updateMetricDisplay('pending-verification', metrics.pendingVerification);
+        updateMetricDisplay('overall-accuracy', metrics.overallAccuracy + '%');
+    }
+    
+    // Load 2025 predictions
+    if (window.predictionsData2025) {
+        updatePredictionsDisplay(window.predictionsData2025);
+    }
+    
+    // Initialize accuracy trends chart with 2025 data
+    initializeAccuracyTrendsChart();
+}
+
+// Initialize accuracy trends chart
+function initializeAccuracyTrendsChart() {
+    const canvas = document.getElementById('accuracy-trends-chart');
+    if (!canvas || !window.accuracyTrends2025) return;
+    
+    const ctx = canvas.getContext('2d');
+    const data = window.accuracyTrends2025.monthly;
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.map(d => d.month),
+            datasets: [{
+                label: 'Prediction Accuracy (%)',
+                data: data.map(d => d.accuracy),
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }, {
+                label: 'Predictions Made',
+                data: data.map(d => d.predictions),
+                borderColor: '#e74c3c',
+                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderWidth: 2,
+                fill: false,
+                yAxisID: 'y1'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Prediction Accuracy Trends - 2025',
+                    font: { size: 16, weight: 'bold' }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Accuracy (%)'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Number of Predictions'
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                }
+            }
+        }
+    });
+}
+
+// Update metric display helper
+function updateMetricDisplay(metricId, value) {
+    const element = document.querySelector(`[data-metric="${metricId}"]`);
+    if (element) {
+        element.textContent = value;
+        // Force black color
+        element.style.setProperty('color', '#000000', 'important');
+        element.style.setProperty('font-weight', '900', 'important');
+        element.style.setProperty('background', 'rgba(255,255,255,0.9)', 'important');
+        element.style.setProperty('padding', '0.2em 0.4em', 'important');
+        element.style.setProperty('border-radius', '4px', 'important');
+    }
 }
 
 // Initialize the Power BI system when DOM is loaded
