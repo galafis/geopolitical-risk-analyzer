@@ -248,6 +248,8 @@ p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    color: #000000;
+    font-weight: 600;
 }
 
 .hero-stats {
@@ -2948,7 +2950,7 @@ section {
     display: block;
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    color: #000000;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1.2;
@@ -2972,6 +2974,7 @@ section {
     
     .stat-label {
         font-size: 0.9rem;
+        color: #000000;
     }
 }
 
