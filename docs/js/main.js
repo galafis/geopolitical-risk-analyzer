@@ -1710,3 +1710,623 @@ function getMilitaryData(capability) {
     return military[capability] || military['nuclear'];
 }
 
+
+// Strategic Recommendations System
+function generateRecommendations() {
+    const audience = document.getElementById('audience-filter').value;
+    const riskLevel = document.getElementById('risk-filter').value;
+    const timeframe = document.getElementById('timeframe-filter').value;
+    
+    const grid = document.getElementById('recommendations-grid');
+    grid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Generating AI-powered recommendations...</div>';
+    
+    setTimeout(() => {
+        const recommendations = getFilteredRecommendations(audience, riskLevel, timeframe);
+        displayRecommendations(recommendations);
+    }, 2000);
+}
+
+function getFilteredRecommendations(audience, riskLevel, timeframe) {
+    const allRecommendations = [
+        {
+            id: 1,
+            title: { en: "Diversify Supply Chains Away from High-Risk Regions", pt: "Diversificar Cadeias de Suprimentos de Regiões de Alto Risco" },
+            description: { 
+                en: "Reduce dependency on Taiwan Strait and Middle East shipping routes. Establish alternative suppliers in stable regions.",
+                pt: "Reduzir dependência das rotas de navegação do Estreito de Taiwan e Oriente Médio. Estabelecer fornecedores alternativos em regiões estáveis."
+            },
+            audience: ["corporations", "investors"],
+            riskLevel: "critical",
+            timeframe: "immediate",
+            impact: "high",
+            urgency: 95,
+            category: "supply-chain",
+            actions: {
+                en: [
+                    "Audit current supplier concentration in high-risk areas",
+                    "Identify alternative suppliers in ASEAN, Latin America, and Africa",
+                    "Negotiate flexible contracts with multiple suppliers",
+                    "Invest in supply chain visibility technology",
+                    "Create emergency procurement protocols"
+                ],
+                pt: [
+                    "Auditar concentração atual de fornecedores em áreas de alto risco",
+                    "Identificar fornecedores alternativos na ASEAN, América Latina e África",
+                    "Negociar contratos flexíveis com múltiplos fornecedores",
+                    "Investir em tecnologia de visibilidade da cadeia de suprimentos",
+                    "Criar protocolos de compras de emergência"
+                ]
+            },
+            financialImpact: { en: "Potential savings of $2-5M annually in risk mitigation", pt: "Economia potencial de $2-5M anuais em mitigação de risco" }
+        },
+        {
+            id: 2,
+            title: { en: "Hedge Against Energy Price Volatility", pt: "Proteger-se Contra Volatilidade dos Preços de Energia" },
+            description: { 
+                en: "Iran-Israel tensions threaten Strait of Hormuz. Secure long-term energy contracts and explore renewable alternatives.",
+                pt: "Tensões Irã-Israel ameaçam Estreito de Hormuz. Garantir contratos de energia de longo prazo e explorar alternativas renováveis."
+            },
+            audience: ["corporations", "governments"],
+            riskLevel: "high",
+            timeframe: "short",
+            impact: "high",
+            urgency: 88,
+            category: "energy",
+            actions: {
+                en: [
+                    "Lock in oil/gas prices through futures contracts",
+                    "Accelerate renewable energy investments",
+                    "Diversify energy suppliers beyond Middle East",
+                    "Implement energy efficiency measures",
+                    "Create strategic energy reserves"
+                ],
+                pt: [
+                    "Fixar preços de petróleo/gás através de contratos futuros",
+                    "Acelerar investimentos em energia renovável",
+                    "Diversificar fornecedores de energia além do Oriente Médio",
+                    "Implementar medidas de eficiência energética",
+                    "Criar reservas estratégicas de energia"
+                ]
+            },
+            financialImpact: { en: "Protect against 30-50% energy cost spikes", pt: "Proteger contra picos de 30-50% nos custos de energia" }
+        },
+        {
+            id: 3,
+            title: { en: "Strengthen Cybersecurity Infrastructure", pt: "Fortalecer Infraestrutura de Cibersegurança" },
+            description: { 
+                en: "Rising state-sponsored cyber attacks. Implement zero-trust architecture and incident response protocols.",
+                pt: "Aumento de ataques cibernéticos patrocinados por estados. Implementar arquitetura zero-trust e protocolos de resposta a incidentes."
+            },
+            audience: ["corporations", "governments", "individuals"],
+            riskLevel: "high",
+            timeframe: "immediate",
+            impact: "critical",
+            urgency: 92,
+            category: "cybersecurity",
+            actions: {
+                en: [
+                    "Deploy multi-factor authentication across all systems",
+                    "Conduct regular penetration testing",
+                    "Train employees on social engineering threats",
+                    "Implement network segmentation",
+                    "Establish cyber incident response team"
+                ],
+                pt: [
+                    "Implementar autenticação multifator em todos os sistemas",
+                    "Realizar testes de penetração regulares",
+                    "Treinar funcionários sobre ameaças de engenharia social",
+                    "Implementar segmentação de rede",
+                    "Estabelecer equipe de resposta a incidentes cibernéticos"
+                ]
+            },
+            financialImpact: { en: "Prevent potential losses of $1-10M from cyber attacks", pt: "Prevenir perdas potenciais de $1-10M de ataques cibernéticos" }
+        },
+        {
+            id: 4,
+            title: { en: "Relocate Critical Operations from Taiwan", pt: "Realocar Operações Críticas de Taiwan" },
+            description: { 
+                en: "China-Taiwan tensions escalating. Move semiconductor and tech operations to reduce exposure to conflict zone.",
+                pt: "Tensões China-Taiwan escalando. Mover operações de semicondutores e tecnologia para reduzir exposição à zona de conflito."
+            },
+            audience: ["corporations"],
+            riskLevel: "critical",
+            timeframe: "medium",
+            impact: "critical",
+            urgency: 85,
+            category: "geopolitical",
+            actions: {
+                en: [
+                    "Assess current Taiwan exposure across operations",
+                    "Identify alternative manufacturing locations",
+                    "Begin gradual relocation of critical processes",
+                    "Secure intellectual property transfers",
+                    "Maintain minimal viable Taiwan presence"
+                ],
+                pt: [
+                    "Avaliar exposição atual de Taiwan em todas as operações",
+                    "Identificar locais alternativos de fabricação",
+                    "Iniciar realocação gradual de processos críticos",
+                    "Garantir transferências de propriedade intelectual",
+                    "Manter presença mínima viável em Taiwan"
+                ]
+            },
+            financialImpact: { en: "Protect $50-500M in assets from potential conflict", pt: "Proteger $50-500M em ativos de potencial conflito" }
+        },
+        {
+            id: 5,
+            title: { en: "Build Emergency Cash Reserves", pt: "Construir Reservas de Caixa de Emergência" },
+            description: { 
+                en: "Global financial instability rising. Maintain 6-12 months operating expenses in liquid assets.",
+                pt: "Instabilidade financeira global aumentando. Manter 6-12 meses de despesas operacionais em ativos líquidos."
+            },
+            audience: ["corporations", "individuals"],
+            riskLevel: "moderate",
+            timeframe: "immediate",
+            impact: "moderate",
+            urgency: 75,
+            category: "financial",
+            actions: {
+                en: [
+                    "Calculate 6-12 months of operating expenses",
+                    "Establish high-yield savings accounts",
+                    "Diversify across multiple currencies",
+                    "Maintain credit line access",
+                    "Review and optimize cash flow management"
+                ],
+                pt: [
+                    "Calcular 6-12 meses de despesas operacionais",
+                    "Estabelecer contas poupança de alto rendimento",
+                    "Diversificar em múltiplas moedas",
+                    "Manter acesso a linhas de crédito",
+                    "Revisar e otimizar gestão de fluxo de caixa"
+                ]
+            },
+            financialImpact: { en: "Ensure business continuity during 6-12 month disruptions", pt: "Garantir continuidade dos negócios durante interrupções de 6-12 meses" }
+        },
+        {
+            id: 6,
+            title: { en: "Invest in Defense and Security Stocks", pt: "Investir em Ações de Defesa e Segurança" },
+            description: { 
+                en: "Rising global tensions drive defense spending. Consider aerospace, cybersecurity, and military technology sectors.",
+                pt: "Tensões globais crescentes impulsionam gastos com defesa. Considerar setores aeroespacial, cibersegurança e tecnologia militar."
+            },
+            audience: ["investors"],
+            riskLevel: "moderate",
+            timeframe: "short",
+            impact: "moderate",
+            urgency: 70,
+            category: "investment",
+            actions: {
+                en: [
+                    "Research major defense contractors (LMT, RTX, NOC)",
+                    "Analyze cybersecurity leaders (CRM, PANW, CRWD)",
+                    "Consider defense ETFs for diversification",
+                    "Monitor government defense budget allocations",
+                    "Set stop-loss orders for risk management"
+                ],
+                pt: [
+                    "Pesquisar grandes contratadas de defesa (LMT, RTX, NOC)",
+                    "Analisar líderes em cibersegurança (CRM, PANW, CRWD)",
+                    "Considerar ETFs de defesa para diversificação",
+                    "Monitorar alocações do orçamento de defesa governamental",
+                    "Definir ordens stop-loss para gestão de risco"
+                ]
+            },
+            financialImpact: { en: "Potential 15-25% returns during conflict periods", pt: "Retornos potenciais de 15-25% durante períodos de conflito" }
+        },
+        {
+            id: 7,
+            title: { en: "Develop Crisis Communication Plans", pt: "Desenvolver Planos de Comunicação de Crise" },
+            description: { 
+                en: "Prepare stakeholder communication for various crisis scenarios. Maintain reputation during turbulent times.",
+                pt: "Preparar comunicação com stakeholders para vários cenários de crise. Manter reputação durante tempos turbulentos."
+            },
+            audience: ["corporations", "governments"],
+            riskLevel: "moderate",
+            timeframe: "immediate",
+            impact: "moderate",
+            urgency: 80,
+            category: "communication",
+            actions: {
+                en: [
+                    "Create crisis communication templates",
+                    "Identify key spokespersons and backup contacts",
+                    "Establish multiple communication channels",
+                    "Prepare FAQ documents for common scenarios",
+                    "Conduct crisis communication drills"
+                ],
+                pt: [
+                    "Criar modelos de comunicação de crise",
+                    "Identificar porta-vozes principais e contatos de backup",
+                    "Estabelecer múltiplos canais de comunicação",
+                    "Preparar documentos de FAQ para cenários comuns",
+                    "Realizar simulações de comunicação de crise"
+                ]
+            },
+            financialImpact: { en: "Protect brand value worth $10-100M during crises", pt: "Proteger valor da marca de $10-100M durante crises" }
+        },
+        {
+            id: 8,
+            title: { en: "Secure Personal Emergency Preparedness", pt: "Garantir Preparação Pessoal para Emergências" },
+            description: { 
+                en: "Individual preparedness for potential disruptions. Food, water, medical supplies, and evacuation plans.",
+                pt: "Preparação individual para possíveis interrupções. Comida, água, suprimentos médicos e planos de evacuação."
+            },
+            audience: ["individuals"],
+            riskLevel: "moderate",
+            timeframe: "immediate",
+            impact: "high",
+            urgency: 85,
+            category: "personal",
+            actions: {
+                en: [
+                    "Store 2-4 weeks of non-perishable food",
+                    "Maintain water storage (1 gallon per person per day)",
+                    "Prepare first aid and medication supplies",
+                    "Create family emergency communication plan",
+                    "Keep important documents in waterproof container"
+                ],
+                pt: [
+                    "Armazenar 2-4 semanas de alimentos não perecíveis",
+                    "Manter armazenamento de água (1 galão por pessoa por dia)",
+                    "Preparar suprimentos de primeiros socorros e medicamentos",
+                    "Criar plano de comunicação de emergência familiar",
+                    "Manter documentos importantes em recipiente à prova d'água"
+                ]
+            },
+            financialImpact: { en: "Protect family safety and reduce emergency costs", pt: "Proteger segurança da família e reduzir custos de emergência" }
+        }
+    ];
+
+    return allRecommendations.filter(rec => {
+        const audienceMatch = audience === 'all' || rec.audience.includes(audience);
+        const riskMatch = riskLevel === 'all' || rec.riskLevel === riskLevel;
+        const timeframeMatch = timeframe === 'all' || rec.timeframe === timeframe;
+        return audienceMatch && riskMatch && timeframeMatch;
+    });
+}
+
+function displayRecommendations(recommendations) {
+    const grid = document.getElementById('recommendations-grid');
+    const currentLang = document.documentElement.lang || 'en';
+    
+    if (recommendations.length === 0) {
+        grid.innerHTML = `<div class="no-results">${currentLang === 'pt' ? 'Nenhuma recomendação encontrada para os filtros selecionados.' : 'No recommendations found for the selected filters.'}</div>`;
+        return;
+    }
+    
+    grid.innerHTML = recommendations.map(rec => `
+        <div class="recommendation-card ${rec.riskLevel}" onclick="openRecommendationModal(${rec.id})">
+            <div class="rec-header">
+                <h3>${rec.title[currentLang]}</h3>
+                <div class="rec-badges">
+                    <span class="urgency-badge">${rec.urgency}%</span>
+                    <span class="risk-badge ${rec.riskLevel}">${rec.riskLevel.toUpperCase()}</span>
+                </div>
+            </div>
+            <p class="rec-description">${rec.description[currentLang]}</p>
+            <div class="rec-meta">
+                <span class="rec-audience">${currentLang === 'pt' ? 'Público: ' : 'Audience: '}${rec.audience.join(', ')}</span>
+                <span class="rec-timeframe">${currentLang === 'pt' ? 'Prazo: ' : 'Timeframe: '}${rec.timeframe}</span>
+            </div>
+            <div class="rec-impact">
+                <i class="fas fa-dollar-sign"></i>
+                <span>${rec.financialImpact[currentLang]}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openRecommendationModal(recId) {
+    const recommendations = getFilteredRecommendations('all', 'all', 'all');
+    const rec = recommendations.find(r => r.id === recId);
+    const currentLang = document.documentElement.lang || 'en';
+    
+    const modal = document.getElementById('scenario-modal');
+    const modalContent = document.getElementById('modal-content');
+    
+    modalContent.innerHTML = `
+        <div class="recommendation-modal-header">
+            <h2>${rec.title[currentLang]}</h2>
+            <div class="rec-modal-badges">
+                <span class="urgency-badge">${rec.urgency}% ${currentLang === 'pt' ? 'Urgência' : 'Urgency'}</span>
+                <span class="risk-badge ${rec.riskLevel}">${rec.riskLevel.toUpperCase()}</span>
+                <span class="impact-badge ${rec.impact}">${rec.impact.toUpperCase()} ${currentLang === 'pt' ? 'IMPACTO' : 'IMPACT'}</span>
+            </div>
+        </div>
+        
+        <div class="recommendation-details">
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Descrição' : 'Description'}</h4>
+                <p>${rec.description[currentLang]}</p>
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Ações Recomendadas' : 'Recommended Actions'}</h4>
+                <ul>
+                    ${rec.actions[currentLang].map(action => `<li>${action}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Impacto Financeiro' : 'Financial Impact'}</h4>
+                <p class="financial-impact">${rec.financialImpact[currentLang]}</p>
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Público-Alvo' : 'Target Audience'}</h4>
+                <p>${rec.audience.join(', ')}</p>
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Prazo de Implementação' : 'Implementation Timeframe'}</h4>
+                <p>${rec.timeframe}</p>
+            </div>
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+}
+
+// Predictions Tracking System
+function refreshPredictions() {
+    const timeline = document.getElementById('predictions-timeline');
+    timeline.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading predictions data...</div>';
+    
+    setTimeout(() => {
+        const predictions = getPredictionsData();
+        displayPredictions(predictions);
+        updateAccuracyChart();
+    }, 1500);
+}
+
+function getPredictionsData() {
+    return [
+        {
+            id: 1,
+            date: "2024-01-15",
+            prediction: {
+                en: "Iran will increase uranium enrichment to 90% by March 2024",
+                pt: "Irã aumentará enriquecimento de urânio para 90% até março de 2024"
+            },
+            status: "verified-correct",
+            category: "nuclear",
+            confidence: 85,
+            outcome: {
+                en: "IAEA confirmed Iran reached 84% enrichment in February 2024",
+                pt: "AIEA confirmou que Irã atingiu 84% de enriquecimento em fevereiro de 2024"
+            },
+            accuracy: 92,
+            verificationDate: "2024-02-28"
+        },
+        {
+            id: 2,
+            date: "2024-02-10",
+            prediction: {
+                en: "China will conduct major military exercises near Taiwan in Q2 2024",
+                pt: "China conduzirá grandes exercícios militares perto de Taiwan no Q2 2024"
+            },
+            status: "verified-correct",
+            category: "military",
+            confidence: 78,
+            outcome: {
+                en: "China conducted 'Joint Sword-2024A' exercises in April 2024",
+                pt: "China conduziu exercícios 'Joint Sword-2024A' em abril de 2024"
+            },
+            accuracy: 95,
+            verificationDate: "2024-04-15"
+        },
+        {
+            id: 3,
+            date: "2024-03-05",
+            prediction: {
+                en: "Oil prices will spike above $100/barrel due to Middle East tensions",
+                pt: "Preços do petróleo dispararão acima de $100/barril devido a tensões no Oriente Médio"
+            },
+            status: "verified-incorrect",
+            category: "economic",
+            confidence: 72,
+            outcome: {
+                en: "Oil peaked at $87/barrel, strategic reserves release prevented spike",
+                pt: "Petróleo atingiu pico de $87/barril, liberação de reservas estratégicas impediu disparo"
+            },
+            accuracy: 65,
+            verificationDate: "2024-05-30"
+        },
+        {
+            id: 4,
+            date: "2024-04-20",
+            prediction: {
+                en: "Russia will escalate cyber attacks on NATO infrastructure by summer 2024",
+                pt: "Rússia escalará ataques cibernéticos em infraestrutura da OTAN até verão de 2024"
+            },
+            status: "active",
+            category: "cybersecurity",
+            confidence: 88,
+            outcome: {
+                en: "Monitoring ongoing - increased activity detected in May-June",
+                pt: "Monitoramento em andamento - atividade aumentada detectada em maio-junho"
+            },
+            accuracy: null,
+            verificationDate: null
+        },
+        {
+            id: 5,
+            date: "2024-05-15",
+            prediction: {
+                en: "North Korea will test new ICBM variant before end of 2024",
+                pt: "Coreia do Norte testará nova variante de ICBM antes do final de 2024"
+            },
+            status: "pending",
+            category: "nuclear",
+            confidence: 75,
+            outcome: {
+                en: "Awaiting verification - satellite imagery shows increased activity",
+                pt: "Aguardando verificação - imagens de satélite mostram atividade aumentada"
+            },
+            accuracy: null,
+            verificationDate: null
+        },
+        {
+            id: 6,
+            date: "2024-06-01",
+            prediction: {
+                en: "EU will impose additional sanctions on Russia by Q4 2024",
+                pt: "UE imporá sanções adicionais à Rússia até Q4 2024"
+            },
+            status: "active",
+            category: "diplomatic",
+            confidence: 82,
+            outcome: {
+                en: "Monitoring - EU discussions ongoing, proposal in development",
+                pt: "Monitoramento - discussões da UE em andamento, proposta em desenvolvimento"
+            },
+            accuracy: null,
+            verificationDate: null
+        }
+    ];
+}
+
+function displayPredictions(predictions) {
+    const timeline = document.getElementById('predictions-timeline');
+    const currentLang = document.documentElement.lang || 'en';
+    
+    timeline.innerHTML = predictions.map(pred => `
+        <div class="prediction-item ${pred.status}" onclick="openPredictionModal(${pred.id})">
+            <div class="prediction-date">
+                <span class="date">${new Date(pred.date).toLocaleDateString()}</span>
+                <span class="category ${pred.category}">${pred.category}</span>
+            </div>
+            <div class="prediction-content">
+                <h4>${pred.prediction[currentLang]}</h4>
+                <div class="prediction-meta">
+                    <span class="confidence">${currentLang === 'pt' ? 'Confiança' : 'Confidence'}: ${pred.confidence}%</span>
+                    <span class="status ${pred.status}">${getStatusText(pred.status, currentLang)}</span>
+                    ${pred.accuracy ? `<span class="accuracy">${currentLang === 'pt' ? 'Precisão' : 'Accuracy'}: ${pred.accuracy}%</span>` : ''}
+                </div>
+                <p class="outcome">${pred.outcome[currentLang]}</p>
+            </div>
+            <div class="prediction-indicator">
+                ${getStatusIcon(pred.status)}
+            </div>
+        </div>
+    `).join('');
+}
+
+function getStatusText(status, lang) {
+    const statusTexts = {
+        'verified-correct': { en: 'Verified Correct', pt: 'Verificada Correta' },
+        'verified-incorrect': { en: 'Verified Incorrect', pt: 'Verificada Incorreta' },
+        'pending': { en: 'Pending', pt: 'Pendente' },
+        'active': { en: 'Active Monitoring', pt: 'Monitoramento Ativo' }
+    };
+    return statusTexts[status][lang];
+}
+
+function getStatusIcon(status) {
+    const icons = {
+        'verified-correct': '<i class="fas fa-check-circle"></i>',
+        'verified-incorrect': '<i class="fas fa-times-circle"></i>',
+        'pending': '<i class="fas fa-clock"></i>',
+        'active': '<i class="fas fa-eye"></i>'
+    };
+    return icons[status];
+}
+
+function openPredictionModal(predId) {
+    const predictions = getPredictionsData();
+    const pred = predictions.find(p => p.id === predId);
+    const currentLang = document.documentElement.lang || 'en';
+    
+    const modal = document.getElementById('scenario-modal');
+    const modalContent = document.getElementById('modal-content');
+    
+    modalContent.innerHTML = `
+        <div class="prediction-modal-header">
+            <h2>${currentLang === 'pt' ? 'Detalhes da Predição' : 'Prediction Details'}</h2>
+            <div class="pred-modal-badges">
+                <span class="confidence-badge">${pred.confidence}% ${currentLang === 'pt' ? 'Confiança' : 'Confidence'}</span>
+                <span class="status-badge ${pred.status}">${getStatusText(pred.status, currentLang)}</span>
+                ${pred.accuracy ? `<span class="accuracy-badge">${pred.accuracy}% ${currentLang === 'pt' ? 'Precisão' : 'Accuracy'}</span>` : ''}
+            </div>
+        </div>
+        
+        <div class="prediction-details">
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Predição Original' : 'Original Prediction'}</h4>
+                <p>${pred.prediction[currentLang]}</p>
+                <small>${currentLang === 'pt' ? 'Data da Predição' : 'Prediction Date'}: ${new Date(pred.date).toLocaleDateString()}</small>
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Resultado/Status' : 'Outcome/Status'}</h4>
+                <p>${pred.outcome[currentLang]}</p>
+                ${pred.verificationDate ? `<small>${currentLang === 'pt' ? 'Data de Verificação' : 'Verification Date'}: ${new Date(pred.verificationDate).toLocaleDateString()}</small>` : ''}
+            </div>
+            
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Categoria' : 'Category'}</h4>
+                <p class="category-tag ${pred.category}">${pred.category}</p>
+            </div>
+            
+            ${pred.accuracy ? `
+            <div class="detail-section">
+                <h4>${currentLang === 'pt' ? 'Análise de Precisão' : 'Accuracy Analysis'}</h4>
+                <div class="accuracy-breakdown">
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${pred.accuracy}%"></div>
+                    </div>
+                    <p>${currentLang === 'pt' ? 'Esta predição atingiu' : 'This prediction achieved'} ${pred.accuracy}% ${currentLang === 'pt' ? 'de precisão baseada na verificação dos resultados.' : 'accuracy based on outcome verification.'}</p>
+                </div>
+            </div>
+            ` : ''}
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+}
+
+function updateAccuracyChart() {
+    const ctx = document.getElementById('accuracy-chart').getContext('2d');
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan 2024', 'Feb 2024', 'Mar 2024', 'Apr 2024', 'May 2024', 'Jun 2024'],
+            datasets: [{
+                label: 'Prediction Accuracy (%)',
+                data: [82, 85, 79, 91, 88, 87],
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+// Initialize recommendations and predictions on page load
+document.addEventListener('DOMContentLoaded', function() {
+    generateRecommendations();
+    refreshPredictions();
+});
+

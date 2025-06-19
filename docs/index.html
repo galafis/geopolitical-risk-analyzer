@@ -41,6 +41,8 @@
                 <a href="#scenarios" class="nav-link">Live Scenarios</a>
                 <a href="#analysis" class="nav-link">Risk Analysis</a>
                 <a href="#framework" class="nav-link">Framework</a>
+                <a href="#recommendations" class="nav-link" data-en="Recommendations" data-pt="Recomendações">Recommendations</a>
+                <a href="#predictions" class="nav-link" data-en="Predictions" data-pt="Predições">Predictions</a>
                 <a href="#about" class="nav-link">About</a>
                 <div class="language-toggle">
                     <button id="lang-en" class="lang-btn active">EN</button>
@@ -705,6 +707,176 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Recommendations Section -->
+    <section id="recommendations" class="recommendations">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Strategic Recommendations" data-pt="Recomendações Estratégicas">Strategic Recommendations</h2>
+                <p data-en="AI-powered actionable insights for businesses and individuals based on comprehensive risk analysis" data-pt="Insights acionáveis baseados em IA para empresas e indivíduos com base em análise abrangente de risco">
+                    AI-powered actionable insights for businesses and individuals based on comprehensive risk analysis
+                </p>
+            </div>
+            
+            <div class="recommendations-dashboard">
+                <div class="recommendation-filters">
+                    <div class="filter-group">
+                        <label data-en="Target Audience" data-pt="Público-Alvo">Target Audience:</label>
+                        <select id="audience-filter" class="filter-select">
+                            <option value="all" data-en="All" data-pt="Todos">All</option>
+                            <option value="corporations" data-en="Corporations" data-pt="Corporações">Corporations</option>
+                            <option value="investors" data-en="Investors" data-pt="Investidores">Investors</option>
+                            <option value="individuals" data-en="Individuals" data-pt="Indivíduos">Individuals</option>
+                            <option value="governments" data-en="Governments" data-pt="Governos">Governments</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label data-en="Risk Level" data-pt="Nível de Risco">Risk Level:</label>
+                        <select id="risk-filter" class="filter-select">
+                            <option value="all" data-en="All Levels" data-pt="Todos os Níveis">All Levels</option>
+                            <option value="critical" data-en="Critical" data-pt="Crítico">Critical</option>
+                            <option value="high" data-en="High" data-pt="Alto">High</option>
+                            <option value="moderate" data-en="Moderate" data-pt="Moderado">Moderate</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label data-en="Time Frame" data-pt="Prazo">Time Frame:</label>
+                        <select id="timeframe-filter" class="filter-select">
+                            <option value="all" data-en="All" data-pt="Todos">All</option>
+                            <option value="immediate" data-en="Immediate (1-30 days)" data-pt="Imediato (1-30 dias)">Immediate</option>
+                            <option value="short" data-en="Short-term (1-6 months)" data-pt="Curto prazo (1-6 meses)">Short-term</option>
+                            <option value="medium" data-en="Medium-term (6-24 months)" data-pt="Médio prazo (6-24 meses)">Medium-term</option>
+                            <option value="long" data-en="Long-term (2+ years)" data-pt="Longo prazo (2+ anos)">Long-term</option>
+                        </select>
+                    </div>
+                    <button class="generate-btn" onclick="generateRecommendations()" data-en="Generate Recommendations" data-pt="Gerar Recomendações">
+                        <i class="fas fa-brain"></i> Generate Recommendations
+                    </button>
+                </div>
+
+                <div class="recommendations-grid" id="recommendations-grid">
+                    <!-- Recommendations will be dynamically loaded here -->
+                </div>
+
+                <div class="recommendation-summary">
+                    <div class="summary-card">
+                        <h3 data-en="Risk Assessment Summary" data-pt="Resumo da Avaliação de Risco">Risk Assessment Summary</h3>
+                        <div class="risk-meters">
+                            <div class="risk-meter">
+                                <span class="meter-label" data-en="Global Stability" data-pt="Estabilidade Global">Global Stability</span>
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="stability-meter" style="width: 35%"></div>
+                                </div>
+                                <span class="meter-value">35%</span>
+                            </div>
+                            <div class="risk-meter">
+                                <span class="meter-label" data-en="Economic Risk" data-pt="Risco Econômico">Economic Risk</span>
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="economic-meter" style="width: 72%"></div>
+                                </div>
+                                <span class="meter-value">72%</span>
+                            </div>
+                            <div class="risk-meter">
+                                <span class="meter-label" data-en="Supply Chain Risk" data-pt="Risco da Cadeia de Suprimentos">Supply Chain Risk</span>
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="supply-meter" style="width: 68%"></div>
+                                </div>
+                                <span class="meter-value">68%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predictions Tracking Section -->
+    <section id="predictions" class="predictions">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-en="Predictions Tracking" data-pt="Acompanhamento de Predições">Predictions Tracking</h2>
+                <p data-en="Monitor and verify the accuracy of our geopolitical predictions over time" data-pt="Monitore e verifique a precisão de nossas predições geopolíticas ao longo do tempo">
+                    Monitor and verify the accuracy of our geopolitical predictions over time
+                </p>
+            </div>
+            
+            <div class="predictions-dashboard">
+                <div class="prediction-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">87.3%</span>
+                            <span class="stat-label" data-en="Overall Accuracy" data-pt="Precisão Geral">Overall Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">156</span>
+                            <span class="stat-label" data-en="Total Predictions" data-pt="Total de Predições">Total Predictions</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">136</span>
+                            <span class="stat-label" data-en="Verified Correct" data-pt="Verificadas Corretas">Verified Correct</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number">23</span>
+                            <span class="stat-label" data-en="Pending Verification" data-pt="Aguardando Verificação">Pending Verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prediction-filters">
+                    <div class="filter-group">
+                        <label data-en="Status" data-pt="Status">Status:</label>
+                        <select id="prediction-status-filter" class="filter-select">
+                            <option value="all" data-en="All" data-pt="Todos">All</option>
+                            <option value="verified-correct" data-en="Verified Correct" data-pt="Verificadas Corretas">Verified Correct</option>
+                            <option value="verified-incorrect" data-en="Verified Incorrect" data-pt="Verificadas Incorretas">Verified Incorrect</option>
+                            <option value="pending" data-en="Pending" data-pt="Pendentes">Pending</option>
+                            <option value="active" data-en="Active Monitoring" data-pt="Monitoramento Ativo">Active Monitoring</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label data-en="Category" data-pt="Categoria">Category:</label>
+                        <select id="prediction-category-filter" class="filter-select">
+                            <option value="all" data-en="All Categories" data-pt="Todas as Categorias">All Categories</option>
+                            <option value="military" data-en="Military Conflicts" data-pt="Conflitos Militares">Military Conflicts</option>
+                            <option value="economic" data-en="Economic Events" data-pt="Eventos Econômicos">Economic Events</option>
+                            <option value="diplomatic" data-en="Diplomatic Relations" data-pt="Relações Diplomáticas">Diplomatic Relations</option>
+                            <option value="nuclear" data-en="Nuclear Developments" data-pt="Desenvolvimentos Nucleares">Nuclear Developments</option>
+                        </select>
+                    </div>
+                    <button class="refresh-predictions-btn" onclick="refreshPredictions()" data-en="Refresh Data" data-pt="Atualizar Dados">
+                        <i class="fas fa-sync-alt"></i> Refresh Data
+                    </button>
+                </div>
+
+                <div class="predictions-timeline" id="predictions-timeline">
+                    <!-- Predictions will be dynamically loaded here -->
+                </div>
+
+                <div class="accuracy-chart-container">
+                    <h3 data-en="Accuracy Trends" data-pt="Tendências de Precisão">Accuracy Trends</h3>
+                    <canvas id="accuracy-chart"></canvas>
                 </div>
             </div>
         </div>
