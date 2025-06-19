@@ -2997,3 +2997,23 @@ section {
     }
 }
 
+
+/* FORÇA ESPECÍFICA PARA O SUBTÍTULO - SOBRESCREVER TUDO */
+.hero .hero-content .hero-subtitle,
+.hero-subtitle,
+p.hero-subtitle {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    font-size: 1.25rem !important;
+}
+
+/* Garantir que funcione em ambos os idiomas */
+[data-en].hero-subtitle,
+[data-pt].hero-subtitle {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+}
+
