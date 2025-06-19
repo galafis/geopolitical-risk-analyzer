@@ -74,6 +74,7 @@ function initializeLanguageToggle() {
 
 function setLanguage(lang) {
     currentLanguage = lang;
+    document.documentElement.lang = lang; // Set document language
     
     // Update all elements with data-en and data-pt attributes
     document.querySelectorAll('[data-en][data-pt]').forEach(element => {
