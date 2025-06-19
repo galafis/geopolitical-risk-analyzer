@@ -1316,8 +1316,9 @@ section {
 .metric-value {
     display: block;
     font-size: 2em;
-    font-weight: bold;
-    color: #2c3e50;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .metric-label, .gti-region {
@@ -1533,8 +1534,10 @@ section {
 .stat-number {
     display: block;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 900 !important;
     margin-bottom: 5px;
+    color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .stat-number.critical {
@@ -3429,5 +3432,63 @@ p.hero-subtitle {
         flex-direction: column;
         gap: 8px;
     }
+}
+
+
+/* Enhanced metric values styling */
+.metric-value, .stat-number, .prediction-value, .warning-value {
+    font-weight: 900 !important;
+    color: #000000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+}
+
+/* Specific overrides for all number displays */
+.metric-value.enhanced,
+.stat-number.enhanced,
+.prediction-metric .value,
+.warning-metric .value,
+.dashboard-metric .value,
+.live-metric .value {
+    font-weight: 900 !important;
+    color: #000000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+}
+
+/* Technology Stack Grid Enhancement */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.tech-item i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.tech-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
 }
 

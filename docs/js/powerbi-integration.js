@@ -124,33 +124,63 @@ class PowerBIIntegration {
     generateMockNewsData(feed) {
         const mockArticles = [
             {
-                title: "Iran increases uranium enrichment to 84% - IAEA reports",
+                title: "Iran strikes Israeli hospital with ballistic missiles - 240 wounded",
                 source: feed.name,
                 timestamp: new Date(),
                 criticality: 'critical',
                 region: 'middle-east',
                 category: 'nuclear',
-                content: "International Atomic Energy Agency confirms Iran has increased uranium enrichment levels...",
+                content: "Iranian missiles hit major hospital in southern Israel, escalating direct military confrontation...",
                 reliability: feed.reliability
             },
             {
-                title: "China conducts military exercises near Taiwan Strait",
+                title: "Israel destroys Iranian nuclear facilities in massive airstrikes",
+                source: feed.name,
+                timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000),
+                criticality: 'critical',
+                region: 'middle-east',
+                category: 'nuclear',
+                content: "Israeli forces target multiple Iranian nuclear installations in coordinated attack...",
+                reliability: feed.reliability
+            },
+            {
+                title: "Russia kills 28 in deadliest Kyiv strikes in almost a year",
                 source: feed.name,
                 timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+                criticality: 'critical',
+                region: 'europe',
+                category: 'military',
+                content: "Russian drone and missile attacks target civilian infrastructure in Ukrainian capital...",
+                reliability: feed.reliability
+            },
+            {
+                title: "China deploys two aircraft carriers near Taiwan simultaneously",
+                source: feed.name,
+                timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
                 criticality: 'high',
                 region: 'asia-pacific',
                 category: 'military',
-                content: "Chinese military forces conducted large-scale exercises in the Taiwan Strait...",
+                content: "Chinese military conducts unprecedented dual carrier operations in Taiwan Strait...",
                 reliability: feed.reliability
             },
             {
-                title: "NATO increases defense spending by 15% amid tensions",
+                title: "North Korea sends additional 15,000 soldiers to Russia",
                 source: feed.name,
                 timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000),
-                criticality: 'moderate',
-                region: 'europe',
+                criticality: 'high',
+                region: 'asia-pacific',
                 category: 'military',
-                content: "NATO member countries agree to significant increase in defense expenditure...",
+                content: "North Korean military deployment to Russia reaches 30,000 troops total...",
+                reliability: feed.reliability
+            },
+            {
+                title: "Trump weighs US military involvement in Iran-Israel conflict",
+                source: feed.name,
+                timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+                criticality: 'critical',
+                region: 'global',
+                category: 'diplomatic',
+                content: "US President to decide on military intervention within two weeks...",
                 reliability: feed.reliability
             }
         ];
