@@ -2622,3 +2622,250 @@ section {
     }
 }
 
+
+/* Enhanced Data Sources Section */
+.data-sources-section {
+    margin: 4rem 0;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.data-sources-section h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.data-sources-section > p {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+}
+
+.source-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.source-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 100%);
+    border-radius: 0 0 0 100px;
+}
+
+.source-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.source-card.primary {
+    border-left-color: #007bff;
+}
+
+.source-card.secondary {
+    border-left-color: #28a745;
+}
+
+.source-card.tertiary {
+    border-left-color: #ffc107;
+}
+
+.source-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.source-header i {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.source-card.secondary .source-header i {
+    color: #28a745;
+}
+
+.source-card.tertiary .source-header i {
+    color: #ffc107;
+}
+
+.source-header h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    flex: 1;
+}
+
+.source-badge {
+    background: #007bff;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.source-badge.secondary {
+    background: #28a745;
+}
+
+.source-badge.tertiary {
+    background: #ffc107;
+    color: #212529;
+}
+
+.source-card p {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.source-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.source-stats span {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #e9ecef;
+}
+
+.data-reliability {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 0 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+
+.data-reliability h4 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.reliability-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.metric {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.metric:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.metric-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,123,255,0.2);
+}
+
+.metric-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sources-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .source-card {
+        padding: 1.5rem;
+    }
+    
+    .data-reliability {
+        margin: 0 1rem;
+        padding: 1.5rem;
+    }
+    
+    .reliability-metrics {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .metric {
+        padding: 1rem;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reliability-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .source-stats {
+        flex-direction: column;
+    }
+    
+    .source-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
