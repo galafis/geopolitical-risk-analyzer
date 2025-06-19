@@ -2718,3 +2718,107 @@ window.addEventListener('load', function() {
     }, 2000);
 });
 
+
+// Mobile Navigation Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Change icon
+            const icon = navToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+});
+
+// Enhanced mobile number visibility
+function ensureMobileNumberVisibility() {
+    const numbers = document.querySelectorAll('.stat-number, .metric-value, .prediction-value, .warning-value');
+    
+    numbers.forEach(el => {
+        // Force styles for mobile
+        el.style.setProperty('color', '#000000', 'important');
+        el.style.setProperty('font-weight', '900', 'important');
+        el.style.setProperty('background', 'rgba(255,255,255,0.95)', 'important');
+        el.style.setProperty('padding', '0.3em 0.6em', 'important');
+        el.style.setProperty('border-radius', '8px', 'important');
+        el.style.setProperty('border', '2px solid #000000', 'important');
+        el.style.setProperty('display', 'inline-block', 'important');
+        el.style.setProperty('text-shadow', 'none', 'important');
+        el.style.setProperty('box-shadow', '0 2px 4px rgba(0,0,0,0.2)', 'important');
+        el.style.setProperty('visibility', 'visible', 'important');
+        el.style.setProperty('opacity', '1', 'important');
+        
+        // Mobile-specific adjustments
+        if (window.innerWidth <= 768) {
+            el.style.setProperty('font-size', '1.8rem', 'important');
+            el.style.setProperty('padding', '0.4em 0.8em', 'important');
+            el.style.setProperty('border-width', '3px', 'important');
+        }
+        
+        if (window.innerWidth <= 480) {
+            el.style.setProperty('font-size', '1.5rem', 'important');
+            el.style.setProperty('padding', '0.5em 1em', 'important');
+            el.style.setProperty('border-radius', '10px', 'important');
+        }
+    });
+    
+    console.log('Mobile number visibility ensured for', numbers.length, 'elements');
+}
+
+// Run on load and resize
+window.addEventListener('load', ensureMobileNumberVisibility);
+window.addEventListener('resize', ensureMobileNumberVisibility);
+window.addEventListener('orientationchange', function() {
+    setTimeout(ensureMobileNumberVisibility, 100);
+});
+
+// Touch event improvements for mobile
+if ('ontouchstart' in window) {
+    document.body.classList.add('touch-device');
+    
+    // Add touch feedback
+    const touchElements = document.querySelectorAll('.btn, .nav-link, .scenario-card, .metric-card');
+    
+    touchElements.forEach(el => {
+        el.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+        
+        el.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+}
+
