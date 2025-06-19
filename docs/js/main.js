@@ -91,6 +91,73 @@ function setLanguage(lang) {
     updateChartsLanguage();
 }
 
+function updateChartsLanguage() {
+    // Update chart labels based on current language
+    const translations = {
+        en: {
+            globalRiskTrends: 'Global Risk Trends',
+            riskByRegion: 'Risk by Region',
+            nuclearRiskMatrix: 'Nuclear Risk Matrix',
+            earlyWarningIndicators: 'Early Warning Indicators',
+            lastDays: 'Last 7 Days',
+            lastMonth: 'Last 30 Days',
+            lastQuarter: 'Last 90 Dias',
+            middleEast: 'Middle East',
+            europe: 'Europe',
+            pacific: 'Pacific',
+            asia: 'Asia',
+            africa: 'Africa',
+            americas: 'Americas'
+        },
+        pt: {
+            globalRiskTrends: 'Tendências de Risco Global',
+            riskByRegion: 'Risco por Região',
+            nuclearRiskMatrix: 'Matriz de Risco Nuclear',
+            earlyWarningIndicators: 'Indicadores de Alerta Precoce',
+            lastDays: 'Últimos 7 Dias',
+            lastMonth: 'Últimos 30 Dias',
+            lastQuarter: 'Últimos 90 Dias',
+            middleEast: 'Oriente Médio',
+            europe: 'Europa',
+            pacific: 'Pacífico',
+            asia: 'Ásia',
+            africa: 'África',
+            americas: 'Américas'
+        }
+    };
+    
+    // Update select options
+    const timeframeSelect = document.getElementById('timeframe-select');
+    if (timeframeSelect) {
+        const options = timeframeSelect.querySelectorAll('option');
+        options.forEach(option => {
+            const translation = option.getAttribute(`data-${currentLanguage}`);
+            if (translation) {
+                option.textContent = translation;
+            }
+        });
+    }
+    
+    // Update charts if they exist
+    if (riskChart) {
+        riskChart.options.plugins.title.text = translations[currentLanguage].globalRiskTrends;
+        riskChart.update();
+    }
+    
+    if (regionalChart) {
+        regionalChart.options.plugins.title.text = translations[currentLanguage].riskByRegion;
+        regionalChart.data.labels = [
+            translations[currentLanguage].middleEast,
+            translations[currentLanguage].europe,
+            translations[currentLanguage].pacific,
+            translations[currentLanguage].asia,
+            translations[currentLanguage].africa,
+            translations[currentLanguage].americas
+        ];
+        regionalChart.update();
+    }
+}
+
 // World map initialization
 function initializeWorldMap() {
     const mapContainer = document.getElementById('world-map');
