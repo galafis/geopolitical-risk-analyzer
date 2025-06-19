@@ -2648,3 +2648,73 @@ function observeNumberElements() {
 // Initialize observer when DOM is ready
 document.addEventListener('DOMContentLoaded', observeNumberElements);
 
+
+// Force initialize 2025 data on page load
+window.addEventListener('load', function() {
+    console.log('Page loaded - forcing 2025 data initialization...');
+    
+    // Wait for all scripts to load
+    setTimeout(() => {
+        // Force load 2025 predictions
+        if (window.predictionsData2025) {
+            const container = document.querySelector('.predictions-list');
+            if (container) {
+                container.innerHTML = '';
+                
+                window.predictionsData2025.forEach(prediction => {
+                    const div = document.createElement('div');
+                    div.className = `prediction-item ${prediction.status.toLowerCase().replace(/\s+/g, '-')}`;
+                    div.innerHTML = `
+                        <div class="prediction-header">
+                            <div class="prediction-date" style="color: #000 !important; font-weight: 900 !important; background: rgba(255,255,255,0.9) !important; padding: 0.2em 0.4em !important; border-radius: 4px !important;">${prediction.date}</div>
+                            <div class="prediction-category ${prediction.category}">${prediction.category.toUpperCase()}</div>
+                        </div>
+                        <div class="prediction-content">
+                            <h4 class="prediction-title">${prediction.prediction}</h4>
+                            <div class="prediction-details">
+                                <span class="prediction-confidence">Confidence: ${prediction.confidence}</span>
+                                <span class="prediction-accuracy">Accuracy: ${prediction.accuracy}</span>
+                                <span class="prediction-status ${prediction.status.toLowerCase().replace(/\s+/g, '-')}">${prediction.status}</span>
+                            </div>
+                            <p class="prediction-outcome">${prediction.outcome}</p>
+                            <div class="prediction-source">Source: ${prediction.source}</div>
+                            <div class="prediction-impact">Impact: ${prediction.impact}</div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                console.log('Successfully loaded', window.predictionsData2025.length, '2025 predictions');
+            }
+        }
+        
+        // Update metrics with 2025 data
+        if (window.accuracyTrends2025) {
+            const metrics = window.accuracyTrends2025.overall;
+            
+            // Update each metric
+            const metricElements = {
+                'total-predictions': metrics.totalPredictions,
+                'verified-correct': metrics.verifiedCorrect,
+                'pending-verification': metrics.pendingVerification,
+                'overall-accuracy': metrics.overallAccuracy + '%'
+            };
+            
+            Object.entries(metricElements).forEach(([id, value]) => {
+                const elements = document.querySelectorAll(`[data-metric="${id}"], .metric-value`);
+                elements.forEach(el => {
+                    if (el.textContent.includes('156') || el.textContent.includes('136') || el.textContent.includes('23') || el.textContent.includes('87')) {
+                        el.textContent = value;
+                        el.style.setProperty('color', '#000000', 'important');
+                        el.style.setProperty('font-weight', '900', 'important');
+                        el.style.setProperty('background', 'rgba(255,255,255,0.9)', 'important');
+                        el.style.setProperty('padding', '0.2em 0.4em', 'important');
+                        el.style.setProperty('border-radius', '4px', 'important');
+                    }
+                });
+            });
+        }
+        
+    }, 2000);
+});
+
