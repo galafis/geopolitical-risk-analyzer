@@ -961,3 +961,752 @@ function getPillarData(pillarId) {
     return pillars[pillarId] || pillars['pillar1'];
 }
 
+
+// Early Warning Indicators Functions
+function openWarningModal(warningId) {
+    const warningData = getWarningData(warningId);
+    const currentLang = document.documentElement.lang || 'en';
+    
+    const modalContent = `
+        <div class="warning-modal-header">
+            <h3>${warningData.title[currentLang]}</h3>
+            <div class="severity-badge ${warningData.severity}">
+                ${warningData.severityText[currentLang]}
+            </div>
+        </div>
+        <div class="warning-modal-body">
+            <div class="warning-details">
+                <div class="detail-section">
+                    <h4>${currentLang === 'pt' ? 'Descrição' : 'Description'}</h4>
+                    <p>${warningData.description[currentLang]}</p>
+                </div>
+                <div class="detail-section">
+                    <h4>${currentLang === 'pt' ? 'Impacto Potencial' : 'Potential Impact'}</h4>
+                    <p>${warningData.impact[currentLang]}</p>
+                </div>
+                <div class="detail-section">
+                    <h4>${currentLang === 'pt' ? 'Fontes' : 'Sources'}</h4>
+                    <ul>
+                        ${warningData.sources[currentLang].map(source => `<li>${source}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="detail-section">
+                    <h4>${currentLang === 'pt' ? 'Recomendações' : 'Recommendations'}</h4>
+                    <ul>
+                        ${warningData.recommendations[currentLang].map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+            <div class="warning-metrics">
+                <div class="metric-item">
+                    <span class="metric-label">${currentLang === 'pt' ? 'Probabilidade' : 'Probability'}</span>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: ${warningData.probability}%"></div>
+                    </div>
+                    <span class="metric-value">${warningData.probability}%</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">${currentLang === 'pt' ? 'Urgência' : 'Urgency'}</span>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: ${warningData.urgency}%"></div>
+                    </div>
+                    <span class="metric-value">${warningData.urgency}%</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">${currentLang === 'pt' ? 'Confiança' : 'Confidence'}</span>
+                    <div class="metric-bar">
+                        <div class="metric-fill" style="width: ${warningData.confidence}%"></div>
+                    </div>
+                    <span class="metric-value">${warningData.confidence}%</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('modal-content').innerHTML = modalContent;
+    document.getElementById('scenario-modal').style.display = 'block';
+}
+
+function getWarningData(warningId) {
+    const warnings = {
+        'nuclear-alert': {
+            title: {
+                en: 'Nuclear Alert Level Raised - Iran',
+                pt: 'Nível de Alerta Nuclear Elevado - Irã'
+            },
+            severity: 'critical',
+            severityText: {
+                en: 'CRITICAL',
+                pt: 'CRÍTICO'
+            },
+            description: {
+                en: 'The International Atomic Energy Agency (IAEA) has reported a significant increase in uranium enrichment activities at Iranian nuclear facilities. Enrichment levels have reached 60%, approaching weapons-grade threshold.',
+                pt: 'A Agência Internacional de Energia Atômica (AIEA) relatou um aumento significativo nas atividades de enriquecimento de urânio nas instalações nucleares iranianas. Os níveis de enriquecimento atingiram 60%, aproximando-se do limiar para armas.'
+            },
+            impact: {
+                en: 'Potential for rapid nuclear weapons development, regional arms race, Israeli preemptive strike, global oil market disruption, and broader Middle East conflict.',
+                pt: 'Potencial para desenvolvimento rápido de armas nucleares, corrida armamentista regional, ataque preventivo israelense, interrupção do mercado global de petróleo e conflito mais amplo no Oriente Médio.'
+            },
+            sources: {
+                en: ['IAEA Safeguards Report', 'Satellite Intelligence Analysis', 'Diplomatic Communications'],
+                pt: ['Relatório de Salvaguardas da AIEA', 'Análise de Inteligência por Satélite', 'Comunicações Diplomáticas']
+            },
+            recommendations: {
+                en: ['Immediate diplomatic intervention', 'Enhanced monitoring of nuclear facilities', 'Preparation of economic sanctions', 'Military contingency planning'],
+                pt: ['Intervenção diplomática imediata', 'Monitoramento aprimorado de instalações nucleares', 'Preparação de sanções econômicas', 'Planejamento de contingência militar']
+            },
+            probability: 85,
+            urgency: 92,
+            confidence: 78
+        },
+        'military-buildup': {
+            title: {
+                en: 'Military Buildup Detected - Taiwan Strait',
+                pt: 'Acúmulo Militar Detectado - Estreito de Taiwan'
+            },
+            severity: 'high',
+            severityText: {
+                en: 'HIGH',
+                pt: 'ALTO'
+            },
+            description: {
+                en: 'Satellite imagery reveals significant Chinese military buildup in the Taiwan Strait region, including naval vessels, amphibious assault ships, and increased air force activity.',
+                pt: 'Imagens de satélite revelam significativo acúmulo militar chinês na região do Estreito de Taiwan, incluindo navios de guerra, navios de assalto anfíbio e aumento da atividade da força aérea.'
+            },
+            impact: {
+                en: 'Potential Taiwan invasion, US military response, global semiconductor supply chain disruption, economic warfare, and broader Pacific conflict.',
+                pt: 'Potencial invasão de Taiwan, resposta militar dos EUA, interrupção da cadeia de suprimentos global de semicondutores, guerra econômica e conflito mais amplo no Pacífico.'
+            },
+            sources: {
+                en: ['Satellite Intelligence', 'Naval Reconnaissance', 'Military Communications Intercept'],
+                pt: ['Inteligência por Satélite', 'Reconhecimento Naval', 'Interceptação de Comunicações Militares']
+            },
+            recommendations: {
+                en: ['Increase regional naval patrols', 'Diplomatic engagement with Beijing', 'Semiconductor supply chain diversification', 'Alliance coordination'],
+                pt: ['Aumentar patrulhas navais regionais', 'Engajamento diplomático com Pequim', 'Diversificação da cadeia de suprimentos de semicondutores', 'Coordenação de alianças']
+            },
+            probability: 72,
+            urgency: 68,
+            confidence: 84
+        },
+        'market-volatility': {
+            title: {
+                en: 'Oil Market Volatility Spike',
+                pt: 'Pico de Volatilidade do Mercado de Petróleo'
+            },
+            severity: 'high',
+            severityText: {
+                en: 'HIGH',
+                pt: 'ALTO'
+            },
+            description: {
+                en: 'Brent crude oil prices have surged 8% in the past 24 hours due to escalating Middle East tensions and concerns about potential disruption to the Strait of Hormuz shipping lane.',
+                pt: 'Os preços do petróleo Brent subiram 8% nas últimas 24 horas devido ao aumento das tensões no Oriente Médio e preocupações sobre potencial interrupção da rota de navegação do Estreito de Hormuz.'
+            },
+            impact: {
+                en: 'Global inflation increase, economic recession risk, energy security concerns, supply chain disruptions, and geopolitical instability.',
+                pt: 'Aumento da inflação global, risco de recessão econômica, preocupações com segurança energética, interrupções na cadeia de suprimentos e instabilidade geopolítica.'
+            },
+            sources: {
+                en: ['Energy Market Analysis', 'Shipping Traffic Data', 'Economic Intelligence'],
+                pt: ['Análise do Mercado de Energia', 'Dados de Tráfego Marítimo', 'Inteligência Econômica']
+            },
+            recommendations: {
+                en: ['Strategic petroleum reserve release', 'Alternative energy source activation', 'Economic stabilization measures', 'Diplomatic crisis management'],
+                pt: ['Liberação de reserva estratégica de petróleo', 'Ativação de fontes de energia alternativas', 'Medidas de estabilização econômica', 'Gestão diplomática de crise']
+            },
+            probability: 76,
+            urgency: 82,
+            confidence: 91
+        },
+        'diplomatic-tension': {
+            title: {
+                en: 'Diplomatic Relations Strained - US-Russia',
+                pt: 'Relações Diplomáticas Tensas - EUA-Rússia'
+            },
+            severity: 'moderate',
+            severityText: {
+                en: 'MODERATE',
+                pt: 'MODERADO'
+            },
+            description: {
+                en: 'The US has recalled its ambassador from Moscow following new sanctions announcement, marking the lowest point in US-Russia relations since the Cold War.',
+                pt: 'Os EUA retiraram seu embaixador de Moscou após o anúncio de novas sanções, marcando o ponto mais baixo nas relações EUA-Rússia desde a Guerra Fria.'
+            },
+            impact: {
+                en: 'Reduced diplomatic communication channels, increased risk of miscalculation, potential for proxy conflicts, and global alliance realignment.',
+                pt: 'Redução dos canais de comunicação diplomática, aumento do risco de erro de cálculo, potencial para conflitos por procuração e realinhamento de alianças globais.'
+            },
+            sources: {
+                en: ['Diplomatic Communications', 'State Department Briefings', 'Foreign Ministry Statements'],
+                pt: ['Comunicações Diplomáticas', 'Briefings do Departamento de Estado', 'Declarações do Ministério das Relações Exteriores']
+            },
+            recommendations: {
+                en: ['Maintain back-channel communications', 'Third-party mediation', 'Crisis communication protocols', 'Alliance consultation'],
+                pt: ['Manter comunicações por canais alternativos', 'Mediação de terceiros', 'Protocolos de comunicação de crise', 'Consulta de alianças']
+            },
+            probability: 65,
+            urgency: 45,
+            confidence: 88
+        },
+        'cyber-activity': {
+            title: {
+                en: 'Increased Cyber Activity - Eastern Europe',
+                pt: 'Aumento da Atividade Cibernética - Europa Oriental'
+            },
+            severity: 'moderate',
+            severityText: {
+                en: 'MODERATE',
+                pt: 'MODERADO'
+            },
+            description: {
+                en: 'Multiple government networks in Eastern European countries have been targeted by sophisticated cyber attacks, with attribution pointing to state-sponsored actors.',
+                pt: 'Múltiplas redes governamentais em países da Europa Oriental foram alvo de ataques cibernéticos sofisticados, com atribuição apontando para atores patrocinados pelo estado.'
+            },
+            impact: {
+                en: 'Critical infrastructure vulnerability, information warfare escalation, democratic process interference, and regional security destabilization.',
+                pt: 'Vulnerabilidade de infraestrutura crítica, escalada de guerra de informação, interferência em processos democráticos e desestabilização da segurança regional.'
+            },
+            sources: {
+                en: ['Cybersecurity Intelligence', 'Network Traffic Analysis', 'Threat Attribution Reports'],
+                pt: ['Inteligência de Segurança Cibernética', 'Análise de Tráfego de Rede', 'Relatórios de Atribuição de Ameaças']
+            },
+            recommendations: {
+                en: ['Enhanced cybersecurity measures', 'International cyber cooperation', 'Critical infrastructure protection', 'Incident response coordination'],
+                pt: ['Medidas aprimoradas de segurança cibernética', 'Cooperação cibernética internacional', 'Proteção de infraestrutura crítica', 'Coordenação de resposta a incidentes']
+            },
+            probability: 58,
+            urgency: 62,
+            confidence: 75
+        },
+        'energy-disruption': {
+            title: {
+                en: 'Energy Supply Disruption Risk',
+                pt: 'Risco de Interrupção do Fornecimento de Energia'
+            },
+            severity: 'low',
+            severityText: {
+                en: 'LOW',
+                pt: 'BAIXO'
+            },
+            description: {
+                en: 'Scheduled maintenance on a major natural gas pipeline in a conflict-affected region poses potential supply disruption risks to European energy markets.',
+                pt: 'Manutenção programada em um importante gasoduto de gás natural em uma região afetada por conflito representa riscos potenciais de interrupção de fornecimento para os mercados de energia europeus.'
+            },
+            impact: {
+                en: 'Temporary energy price increases, supply chain adjustments, alternative energy source activation, and regional energy security concerns.',
+                pt: 'Aumentos temporários nos preços de energia, ajustes na cadeia de suprimentos, ativação de fontes de energia alternativas e preocupações com segurança energética regional.'
+            },
+            sources: {
+                en: ['Energy Infrastructure Reports', 'Pipeline Monitoring Systems', 'Market Analysis'],
+                pt: ['Relatórios de Infraestrutura Energética', 'Sistemas de Monitoramento de Gasodutos', 'Análise de Mercado']
+            },
+            recommendations: {
+                en: ['Alternative supply route preparation', 'Strategic reserve monitoring', 'Market stabilization measures', 'Infrastructure security assessment'],
+                pt: ['Preparação de rotas de fornecimento alternativas', 'Monitoramento de reservas estratégicas', 'Medidas de estabilização do mercado', 'Avaliação de segurança da infraestrutura']
+            },
+            probability: 35,
+            urgency: 28,
+            confidence: 82
+        }
+    };
+    
+    return warnings[warningId] || warnings['nuclear-alert'];
+}
+
+function refreshWarningIndicators() {
+    // Simulate real-time updates
+    const indicators = document.querySelectorAll('.indicator-time');
+    indicators.forEach(indicator => {
+        const currentTime = indicator.textContent;
+        const currentLang = document.documentElement.lang || 'en';
+        
+        // Simulate time progression
+        if (currentLang === 'pt') {
+            if (currentTime.includes('minutos')) {
+                const minutes = parseInt(currentTime) + Math.floor(Math.random() * 5);
+                indicator.textContent = `${minutes} minutos atrás`;
+            } else if (currentTime.includes('hora')) {
+                const hours = parseInt(currentTime);
+                const minutes = Math.floor(Math.random() * 60);
+                indicator.textContent = `${hours} hora${hours > 1 ? 's' : ''} e ${minutes} minutos atrás`;
+            }
+        } else {
+            if (currentTime.includes('minutes')) {
+                const minutes = parseInt(currentTime) + Math.floor(Math.random() * 5);
+                indicator.textContent = `${minutes} minutes ago`;
+            } else if (currentTime.includes('hour')) {
+                const hours = parseInt(currentTime);
+                const minutes = Math.floor(Math.random() * 60);
+                indicator.textContent = `${hours} hour${hours > 1 ? 's' : ''} and ${minutes} minutes ago`;
+            }
+        }
+    });
+    
+    // Add refresh animation
+    const refreshBtn = document.querySelector('.refresh-btn i');
+    refreshBtn.style.animation = 'spin 1s linear';
+    setTimeout(() => {
+        refreshBtn.style.animation = '';
+    }, 1000);
+}
+
+// Military Capabilities Functions
+function openMilitaryModal(capability) {
+    const militaryData = getMilitaryData(capability);
+    const currentLang = document.documentElement.lang || 'en';
+    
+    const modalContent = `
+        <div class="military-modal-header">
+            <h3>${militaryData.title[currentLang]}</h3>
+            <div class="capability-badge">
+                ${militaryData.category[currentLang]}
+            </div>
+        </div>
+        <div class="military-modal-body">
+            <div class="military-overview">
+                <p>${militaryData.description[currentLang]}</p>
+            </div>
+            <div class="military-data">
+                ${militaryData.data[currentLang]}
+            </div>
+            <div class="military-analysis">
+                <h4>${currentLang === 'pt' ? 'Análise de Risco' : 'Risk Analysis'}</h4>
+                <p>${militaryData.analysis[currentLang]}</p>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('modal-content').innerHTML = modalContent;
+    document.getElementById('scenario-modal').style.display = 'block';
+}
+
+function getMilitaryData(capability) {
+    const military = {
+        'nuclear': {
+            title: {
+                en: 'Nuclear Arsenal Tracking',
+                pt: 'Rastreamento de Arsenal Nuclear'
+            },
+            category: {
+                en: 'Nuclear Capabilities',
+                pt: 'Capacidades Nucleares'
+            },
+            description: {
+                en: 'Real-time monitoring and analysis of global nuclear weapons capabilities, including warhead counts, delivery systems, and enrichment activities.',
+                pt: 'Monitoramento e análise em tempo real das capacidades globais de armas nucleares, incluindo contagem de ogivas, sistemas de entrega e atividades de enriquecimento.'
+            },
+            data: {
+                en: `
+                    <div class="nuclear-data">
+                        <h4>Global Nuclear Arsenal (2024)</h4>
+                        <div class="nuclear-countries">
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇺🇸</span>
+                                <span class="country-name">United States</span>
+                                <span class="warhead-count">5,550</span>
+                                <span class="status deployed">Deployed</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇷🇺</span>
+                                <span class="country-name">Russia</span>
+                                <span class="warhead-count">6,257</span>
+                                <span class="status deployed">Deployed</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇨🇳</span>
+                                <span class="country-name">China</span>
+                                <span class="warhead-count">350</span>
+                                <span class="status expanding">Expanding</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇫🇷</span>
+                                <span class="country-name">France</span>
+                                <span class="warhead-count">290</span>
+                                <span class="status stable">Stable</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇬🇧</span>
+                                <span class="country-name">United Kingdom</span>
+                                <span class="warhead-count">225</span>
+                                <span class="status stable">Stable</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇮🇳</span>
+                                <span class="country-name">India</span>
+                                <span class="warhead-count">164</span>
+                                <span class="status expanding">Expanding</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇵🇰</span>
+                                <span class="country-name">Pakistan</span>
+                                <span class="warhead-count">170</span>
+                                <span class="status expanding">Expanding</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇮🇱</span>
+                                <span class="country-name">Israel</span>
+                                <span class="warhead-count">~90</span>
+                                <span class="status undeclared">Undeclared</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇰🇵</span>
+                                <span class="country-name">North Korea</span>
+                                <span class="warhead-count">~30</span>
+                                <span class="status developing">Developing</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                pt: `
+                    <div class="nuclear-data">
+                        <h4>Arsenal Nuclear Global (2024)</h4>
+                        <div class="nuclear-countries">
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇺🇸</span>
+                                <span class="country-name">Estados Unidos</span>
+                                <span class="warhead-count">5.550</span>
+                                <span class="status deployed">Implantado</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇷🇺</span>
+                                <span class="country-name">Rússia</span>
+                                <span class="warhead-count">6.257</span>
+                                <span class="status deployed">Implantado</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇨🇳</span>
+                                <span class="country-name">China</span>
+                                <span class="warhead-count">350</span>
+                                <span class="status expanding">Expandindo</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇫🇷</span>
+                                <span class="country-name">França</span>
+                                <span class="warhead-count">290</span>
+                                <span class="status stable">Estável</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇬🇧</span>
+                                <span class="country-name">Reino Unido</span>
+                                <span class="warhead-count">225</span>
+                                <span class="status stable">Estável</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇮🇳</span>
+                                <span class="country-name">Índia</span>
+                                <span class="warhead-count">164</span>
+                                <span class="status expanding">Expandindo</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇵🇰</span>
+                                <span class="country-name">Paquistão</span>
+                                <span class="warhead-count">170</span>
+                                <span class="status expanding">Expandindo</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇮🇱</span>
+                                <span class="country-name">Israel</span>
+                                <span class="warhead-count">~90</span>
+                                <span class="status undeclared">Não Declarado</span>
+                            </div>
+                            <div class="nuclear-country">
+                                <span class="country-flag">🇰🇵</span>
+                                <span class="country-name">Coreia do Norte</span>
+                                <span class="warhead-count">~30</span>
+                                <span class="status developing">Desenvolvendo</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            analysis: {
+                en: 'Current nuclear landscape shows concerning trends: China\'s rapid expansion, North Korea\'s continued development, and Iran\'s enrichment activities. The risk of nuclear escalation in regional conflicts has increased significantly.',
+                pt: 'O cenário nuclear atual mostra tendências preocupantes: rápida expansão da China, desenvolvimento contínuo da Coreia do Norte e atividades de enriquecimento do Irã. O risco de escalada nuclear em conflitos regionais aumentou significativamente.'
+            }
+        },
+        'conventional': {
+            title: {
+                en: 'Conventional Force Assessment',
+                pt: 'Avaliação de Força Convencional'
+            },
+            category: {
+                en: 'Military Capabilities',
+                pt: 'Capacidades Militares'
+            },
+            description: {
+                en: 'Comprehensive analysis of conventional military forces including personnel, equipment, readiness levels, and deployment patterns across global hotspots.',
+                pt: 'Análise abrangente das forças militares convencionais incluindo pessoal, equipamentos, níveis de prontidão e padrões de implantação em pontos críticos globais.'
+            },
+            data: {
+                en: `
+                    <div class="conventional-data">
+                        <h4>Major Military Powers (2024)</h4>
+                        <div class="military-comparison">
+                            <div class="military-power">
+                                <h5>🇺🇸 United States</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Active Personnel: 1.4M</div>
+                                    <div class="metric">Defense Budget: $816B</div>
+                                    <div class="metric">Aircraft Carriers: 11</div>
+                                    <div class="metric">Fighter Aircraft: 2,085</div>
+                                </div>
+                            </div>
+                            <div class="military-power">
+                                <h5>🇨🇳 China</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Active Personnel: 2.0M</div>
+                                    <div class="metric">Defense Budget: $293B</div>
+                                    <div class="metric">Aircraft Carriers: 3</div>
+                                    <div class="metric">Fighter Aircraft: 1,200</div>
+                                </div>
+                            </div>
+                            <div class="military-power">
+                                <h5>🇷🇺 Russia</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Active Personnel: 1.0M</div>
+                                    <div class="metric">Defense Budget: $86B</div>
+                                    <div class="metric">Aircraft Carriers: 1</div>
+                                    <div class="metric">Fighter Aircraft: 809</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                pt: `
+                    <div class="conventional-data">
+                        <h4>Principais Potências Militares (2024)</h4>
+                        <div class="military-comparison">
+                            <div class="military-power">
+                                <h5>🇺🇸 Estados Unidos</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Pessoal Ativo: 1,4M</div>
+                                    <div class="metric">Orçamento de Defesa: $816B</div>
+                                    <div class="metric">Porta-aviões: 11</div>
+                                    <div class="metric">Aeronaves de Combate: 2.085</div>
+                                </div>
+                            </div>
+                            <div class="military-power">
+                                <h5>🇨🇳 China</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Pessoal Ativo: 2,0M</div>
+                                    <div class="metric">Orçamento de Defesa: $293B</div>
+                                    <div class="metric">Porta-aviões: 3</div>
+                                    <div class="metric">Aeronaves de Combate: 1.200</div>
+                                </div>
+                            </div>
+                            <div class="military-power">
+                                <h5>🇷🇺 Rússia</h5>
+                                <div class="power-metrics">
+                                    <div class="metric">Pessoal Ativo: 1,0M</div>
+                                    <div class="metric">Orçamento de Defesa: $86B</div>
+                                    <div class="metric">Porta-aviões: 1</div>
+                                    <div class="metric">Aeronaves de Combate: 809</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            analysis: {
+                en: 'The conventional military balance is shifting with China\'s rapid modernization and expansion. Regional powers are increasing defense spending in response to growing tensions.',
+                pt: 'O equilíbrio militar convencional está mudando com a rápida modernização e expansão da China. Potências regionais estão aumentando gastos de defesa em resposta às crescentes tensões.'
+            }
+        },
+        'cbrn': {
+            title: {
+                en: 'CBRN Capabilities Assessment',
+                pt: 'Avaliação de Capacidades QBRN'
+            },
+            category: {
+                en: 'CBRN Threats',
+                pt: 'Ameaças QBRN'
+            },
+            description: {
+                en: 'Analysis of Chemical, Biological, Radiological, and Nuclear threat capabilities and proliferation risks across state and non-state actors.',
+                pt: 'Análise das capacidades de ameaças Químicas, Biológicas, Radiológicas e Nucleares e riscos de proliferação entre atores estatais e não-estatais.'
+            },
+            data: {
+                en: `
+                    <div class="cbrn-data">
+                        <h4>CBRN Threat Assessment</h4>
+                        <div class="threat-categories">
+                            <div class="threat-category">
+                                <h5>Chemical Weapons</h5>
+                                <div class="threat-level high">HIGH RISK</div>
+                                <p>Syria, Russia confirmed use. Proliferation concerns in conflict zones.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Biological Weapons</h5>
+                                <div class="threat-level moderate">MODERATE RISK</div>
+                                <p>Dual-use research concerns. Enhanced surveillance post-COVID.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Radiological Dispersal</h5>
+                                <div class="threat-level moderate">MODERATE RISK</div>
+                                <p>Dirty bomb scenarios. Nuclear facility security concerns.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Nuclear Terrorism</h5>
+                                <div class="threat-level low">LOW RISK</div>
+                                <p>Highly secured materials. International cooperation strong.</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                pt: `
+                    <div class="cbrn-data">
+                        <h4>Avaliação de Ameaças QBRN</h4>
+                        <div class="threat-categories">
+                            <div class="threat-category">
+                                <h5>Armas Químicas</h5>
+                                <div class="threat-level high">RISCO ALTO</div>
+                                <p>Síria, Rússia confirmaram uso. Preocupações de proliferação em zonas de conflito.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Armas Biológicas</h5>
+                                <div class="threat-level moderate">RISCO MODERADO</div>
+                                <p>Preocupações com pesquisa de duplo uso. Vigilância aprimorada pós-COVID.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Dispersão Radiológica</h5>
+                                <div class="threat-level moderate">RISCO MODERADO</div>
+                                <p>Cenários de bomba suja. Preocupações com segurança de instalações nucleares.</p>
+                            </div>
+                            <div class="threat-category">
+                                <h5>Terrorismo Nuclear</h5>
+                                <div class="threat-level low">RISCO BAIXO</div>
+                                <p>Materiais altamente protegidos. Cooperação internacional forte.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            analysis: {
+                en: 'CBRN threats remain a significant concern, particularly chemical weapons proliferation in conflict zones and potential biological weapon development under dual-use research programs.',
+                pt: 'Ameaças QBRN permanecem uma preocupação significativa, particularmente a proliferação de armas químicas em zonas de conflito e potencial desenvolvimento de armas biológicas sob programas de pesquisa de duplo uso.'
+            }
+        },
+        'balance': {
+            title: {
+                en: 'Military Balance Analysis',
+                pt: 'Análise de Equilíbrio Militar'
+            },
+            category: {
+                en: 'Strategic Balance',
+                pt: 'Equilíbrio Estratégico'
+            },
+            description: {
+                en: 'Comparative analysis of military power between nations, including force projection capabilities, technological advantages, and strategic positioning.',
+                pt: 'Análise comparativa do poder militar entre nações, incluindo capacidades de projeção de força, vantagens tecnológicas e posicionamento estratégico.'
+            },
+            data: {
+                en: `
+                    <div class="balance-data">
+                        <h4>Regional Military Balance</h4>
+                        <div class="regional-balances">
+                            <div class="region-balance">
+                                <h5>Indo-Pacific</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇺🇸 US Alliance</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill us" style="width: 60%"></div>
+                                    </div>
+                                    <span class="country">🇨🇳 China</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill china" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                                <p>US maintains edge but China rapidly closing gap</p>
+                            </div>
+                            <div class="region-balance">
+                                <h5>Europe</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇺🇸 NATO</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill nato" style="width: 75%"></div>
+                                    </div>
+                                    <span class="country">🇷🇺 Russia</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill russia" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                <p>NATO maintains significant conventional advantage</p>
+                            </div>
+                            <div class="region-balance">
+                                <h5>Middle East</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇮🇱 Israel</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill israel" style="width: 45%"></div>
+                                    </div>
+                                    <span class="country">🇮🇷 Iran Axis</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill iran" style="width: 55%"></div>
+                                    </div>
+                                </div>
+                                <p>Iran's proxy network provides asymmetric advantage</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                pt: `
+                    <div class="balance-data">
+                        <h4>Equilíbrio Militar Regional</h4>
+                        <div class="regional-balances">
+                            <div class="region-balance">
+                                <h5>Indo-Pacífico</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇺🇸 Aliança EUA</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill us" style="width: 60%"></div>
+                                    </div>
+                                    <span class="country">🇨🇳 China</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill china" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                                <p>EUA mantém vantagem mas China está fechando rapidamente a lacuna</p>
+                            </div>
+                            <div class="region-balance">
+                                <h5>Europa</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇺🇸 OTAN</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill nato" style="width: 75%"></div>
+                                    </div>
+                                    <span class="country">🇷🇺 Rússia</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill russia" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                <p>OTAN mantém vantagem convencional significativa</p>
+                            </div>
+                            <div class="region-balance">
+                                <h5>Oriente Médio</h5>
+                                <div class="balance-indicator">
+                                    <span class="country">🇮🇱 Israel</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill israel" style="width: 45%"></div>
+                                    </div>
+                                    <span class="country">🇮🇷 Eixo Irã</span>
+                                    <div class="balance-bar">
+                                        <div class="balance-fill iran" style="width: 55%"></div>
+                                    </div>
+                                </div>
+                                <p>Rede de proxy do Irã fornece vantagem assimétrica</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            analysis: {
+                en: 'Global military balance is shifting toward multipolarity. Regional powers are developing asymmetric capabilities to challenge traditional military advantages.',
+                pt: 'O equilíbrio militar global está mudando em direção à multipolaridade. Potências regionais estão desenvolvendo capacidades assimétricas para desafiar vantagens militares tradicionais.'
+            }
+        }
+    };
+    
+    return military[capability] || military['nuclear'];
+}
+

@@ -390,38 +390,125 @@
                 <div class="dashboard-card">
                     <div class="card-header">
                         <h3 data-en="Early Warning Indicators" data-pt="Indicadores de Alerta Precoce">Early Warning Indicators</h3>
+                        <div class="warning-controls">
+                            <select class="filter-select" data-en-placeholder="Filter by Type" data-pt-placeholder="Filtrar por Tipo">
+                                <option value="all" data-en="All Types" data-pt="Todos os Tipos">All Types</option>
+                                <option value="nuclear" data-en="Nuclear" data-pt="Nuclear">Nuclear</option>
+                                <option value="military" data-en="Military" data-pt="Militar">Military</option>
+                                <option value="economic" data-en="Economic" data-pt="Econômico">Economic</option>
+                                <option value="diplomatic" data-en="Diplomatic" data-pt="Diplomático">Diplomatic</option>
+                                <option value="cyber" data-en="Cyber" data-pt="Cibernético">Cyber</option>
+                            </select>
+                            <button class="refresh-btn" onclick="refreshWarningIndicators()" data-en="Refresh" data-pt="Atualizar">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <div class="warning-indicators">
-                            <div class="indicator-item active">
+                        <div class="warning-indicators" id="warning-indicators-list">
+                            <div class="indicator-item critical" onclick="openWarningModal('nuclear-alert')">
                                 <div class="indicator-icon">
                                     <i class="fas fa-radiation"></i>
                                 </div>
                                 <div class="indicator-content">
-                                    <span class="indicator-title" data-en="Nuclear Alert Level Raised" data-pt="Nível de Alerta Nuclear Elevado">Nuclear Alert Level Raised</span>
-                                    <span class="indicator-time" data-en="2 hours ago" data-pt="2 horas atrás">2 hours ago</span>
+                                    <span class="indicator-title" data-en="Nuclear Alert Level Raised - Iran" data-pt="Nível de Alerta Nuclear Elevado - Irã">Nuclear Alert Level Raised - Iran</span>
+                                    <span class="indicator-description" data-en="IAEA reports increased uranium enrichment activity" data-pt="AIEA relata aumento da atividade de enriquecimento de urânio">IAEA reports increased uranium enrichment activity</span>
+                                    <span class="indicator-time" data-en="23 minutes ago" data-pt="23 minutos atrás">23 minutes ago</span>
                                 </div>
-                                <div class="indicator-severity critical"></div>
+                                <div class="indicator-severity critical">
+                                    <span data-en="CRITICAL" data-pt="CRÍTICO">CRITICAL</span>
+                                </div>
                             </div>
-                            <div class="indicator-item">
+                            
+                            <div class="indicator-item high" onclick="openWarningModal('military-buildup')">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-fighter-jet"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Military Buildup Detected - Taiwan Strait" data-pt="Acúmulo Militar Detectado - Estreito de Taiwan">Military Buildup Detected - Taiwan Strait</span>
+                                    <span class="indicator-description" data-en="Satellite imagery shows increased naval activity" data-pt="Imagens de satélite mostram aumento da atividade naval">Satellite imagery shows increased naval activity</span>
+                                    <span class="indicator-time" data-en="1 hour ago" data-pt="1 hora atrás">1 hour ago</span>
+                                </div>
+                                <div class="indicator-severity high">
+                                    <span data-en="HIGH" data-pt="ALTO">HIGH</span>
+                                </div>
+                            </div>
+
+                            <div class="indicator-item high" onclick="openWarningModal('market-volatility')">
                                 <div class="indicator-icon">
                                     <i class="fas fa-chart-line"></i>
                                 </div>
                                 <div class="indicator-content">
-                                    <span class="indicator-title" data-en="Market Volatility Spike" data-pt="Pico de Volatilidade do Mercado">Market Volatility Spike</span>
-                                    <span class="indicator-time" data-en="6 hours ago" data-pt="6 horas atrás">6 hours ago</span>
+                                    <span class="indicator-title" data-en="Oil Market Volatility Spike" data-pt="Pico de Volatilidade do Mercado de Petróleo">Oil Market Volatility Spike</span>
+                                    <span class="indicator-description" data-en="Brent crude up 8% on Middle East tensions" data-pt="Petróleo Brent sobe 8% com tensões no Oriente Médio">Brent crude up 8% on Middle East tensions</span>
+                                    <span class="indicator-time" data-en="2 hours ago" data-pt="2 horas atrás">2 hours ago</span>
                                 </div>
-                                <div class="indicator-severity high"></div>
+                                <div class="indicator-severity high">
+                                    <span data-en="HIGH" data-pt="ALTO">HIGH</span>
+                                </div>
                             </div>
-                            <div class="indicator-item">
+
+                            <div class="indicator-item moderate" onclick="openWarningModal('diplomatic-tension')">
                                 <div class="indicator-icon">
-                                    <i class="fas fa-satellite"></i>
+                                    <i class="fas fa-handshake-slash"></i>
                                 </div>
                                 <div class="indicator-content">
-                                    <span class="indicator-title" data-en="Military Satellite Activity" data-pt="Atividade de Satélite Militar">Military Satellite Activity</span>
-                                    <span class="indicator-time" data-en="12 hours ago" data-pt="12 horas atrás">12 hours ago</span>
+                                    <span class="indicator-title" data-en="Diplomatic Relations Strained - US-Russia" data-pt="Relações Diplomáticas Tensas - EUA-Rússia">Diplomatic Relations Strained - US-Russia</span>
+                                    <span class="indicator-description" data-en="Ambassador recalled following sanctions announcement" data-pt="Embaixador retirado após anúncio de sanções">Ambassador recalled following sanctions announcement</span>
+                                    <span class="indicator-time" data-en="4 hours ago" data-pt="4 horas atrás">4 hours ago</span>
                                 </div>
-                                <div class="indicator-severity moderate"></div>
+                                <div class="indicator-severity moderate">
+                                    <span data-en="MODERATE" data-pt="MODERADO">MODERATE</span>
+                                </div>
+                            </div>
+
+                            <div class="indicator-item moderate" onclick="openWarningModal('cyber-activity')">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-shield-virus"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Increased Cyber Activity - Eastern Europe" data-pt="Aumento da Atividade Cibernética - Europa Oriental">Increased Cyber Activity - Eastern Europe</span>
+                                    <span class="indicator-description" data-en="Multiple government networks targeted" data-pt="Múltiplas redes governamentais visadas">Multiple government networks targeted</span>
+                                    <span class="indicator-time" data-en="6 hours ago" data-pt="6 horas atrás">6 hours ago</span>
+                                </div>
+                                <div class="indicator-severity moderate">
+                                    <span data-en="MODERATE" data-pt="MODERADO">MODERATE</span>
+                                </div>
+                            </div>
+
+                            <div class="indicator-item low" onclick="openWarningModal('energy-disruption')">
+                                <div class="indicator-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-title" data-en="Energy Supply Disruption Risk" data-pt="Risco de Interrupção do Fornecimento de Energia">Energy Supply Disruption Risk</span>
+                                    <span class="indicator-description" data-en="Pipeline maintenance scheduled in conflict zone" data-pt="Manutenção de gasoduto programada em zona de conflito">Pipeline maintenance scheduled in conflict zone</span>
+                                    <span class="indicator-time" data-en="8 hours ago" data-pt="8 horas atrás">8 hours ago</span>
+                                </div>
+                                <div class="indicator-severity low">
+                                    <span data-en="LOW" data-pt="BAIXO">LOW</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="warning-summary">
+                            <div class="summary-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number critical">2</span>
+                                    <span class="stat-label" data-en="Critical" data-pt="Críticos">Critical</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number high">3</span>
+                                    <span class="stat-label" data-en="High" data-pt="Altos">High</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number moderate">2</span>
+                                    <span class="stat-label" data-en="Moderate" data-pt="Moderados">Moderate</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number low">1</span>
+                                    <span class="stat-label" data-en="Low" data-pt="Baixos">Low</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -507,21 +594,25 @@
                     </p>
                 </div>
                 <div class="military-features">
-                    <div class="feature">
+                    <div class="feature" onclick="openMilitaryModal('nuclear')">
                         <i class="fas fa-atom"></i>
                         <span data-en="Nuclear Arsenal Tracking" data-pt="Rastreamento de Arsenal Nuclear">Nuclear Arsenal Tracking</span>
+                        <div class="feature-description" data-en="Real-time tracking of global nuclear capabilities" data-pt="Rastreamento em tempo real das capacidades nucleares globais">Real-time tracking of global nuclear capabilities</div>
                     </div>
-                    <div class="feature">
+                    <div class="feature" onclick="openMilitaryModal('conventional')">
                         <i class="fas fa-fighter-jet"></i>
                         <span data-en="Conventional Force Assessment" data-pt="Avaliação de Força Convencional">Conventional Force Assessment</span>
+                        <div class="feature-description" data-en="Analysis of military personnel, equipment, and readiness" data-pt="Análise de pessoal militar, equipamentos e prontidão">Analysis of military personnel, equipment, and readiness</div>
                     </div>
-                    <div class="feature">
+                    <div class="feature" onclick="openMilitaryModal('cbrn')">
                         <i class="fas fa-biohazard"></i>
                         <span data-en="CBRN Capabilities" data-pt="Capacidades QBRN">CBRN Capabilities</span>
+                        <div class="feature-description" data-en="Chemical, Biological, Radiological, Nuclear threat assessment" data-pt="Avaliação de ameaças Químicas, Biológicas, Radiológicas, Nucleares">Chemical, Biological, Radiological, Nuclear threat assessment</div>
                     </div>
-                    <div class="feature">
+                    <div class="feature" onclick="openMilitaryModal('balance')">
                         <i class="fas fa-balance-scale"></i>
                         <span data-en="Military Balance Analysis" data-pt="Análise de Equilíbrio Militar">Military Balance Analysis</span>
+                        <div class="feature-description" data-en="Comparative analysis of military power between nations" data-pt="Análise comparativa do poder militar entre nações">Comparative analysis of military power between nations</div>
                     </div>
                 </div>
             </div>
