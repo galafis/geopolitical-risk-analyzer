@@ -266,8 +266,14 @@ p {
 .stat-number {
     display: block;
     font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffd700;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    border: 3px solid #000000 !important;
+    text-shadow: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
 }
 
 .stat-label {
