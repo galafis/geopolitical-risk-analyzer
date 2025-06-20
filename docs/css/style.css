@@ -3651,12 +3651,16 @@ p.hero-subtitle {
     display: inline-block !important;
     color: #000000 !important;
     font-weight: 900 !important;
-    background: rgba(255,255,255,0.95) !important;
-    padding: 0.3em 0.6em !important;
-    border-radius: 8px !important;
-    border: 2px solid #000000 !important;
+    background: rgba(255,255,255,0.98) !important;
+    padding: 0.4em 0.8em !important;
+    border-radius: 12px !important;
+    border: 3px solid #000000 !important;
     text-shadow: none !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    font-size: 1.8rem !important;
+    line-height: 1.2 !important;
+    min-width: 60px !important;
+    text-align: center !important;
 }
 
 /* Mobile navigation improvements */
