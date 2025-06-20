@@ -263,6 +263,30 @@ p {
     text-align: center;
 }
 
+/* Novo design para números claramente visíveis */
+.stat-number-container {
+    background: #ffffff;
+    border: 4px solid #000000;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px auto;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.stat-number-large {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    text-shadow: none !important;
+    line-height: 1 !important;
+    display: block !important;
+}
+
 .stat-number {
     display: block;
     font-size: 2.5rem;
