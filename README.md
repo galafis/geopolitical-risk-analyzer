@@ -1,5 +1,7 @@
 # Geopolitical Risk Analyzer 🌍⚔️
 
+![Geopolitical Risk Analyzer Hero Image](docs/assets/hero_image.png)
+
 *A comprehensive framework for predicting and analyzing geopolitical risks using advanced data science and machine learning techniques*
 
 **Author:** Gabriel Demetrios Lafis  
@@ -11,6 +13,7 @@
 ## 🇺🇸 English | [🇧🇷 Português](#português)
 
 ### 📋 Table of Contents
+- [🖼️ Imagem Hero](#️-imagem-hero)
 - [Overview](#overview)
 - [🔥 Why This Matters Now](#-why-this-matters-now)
 - [🌍 Current Critical Scenarios](#-current-critical-scenarios)
